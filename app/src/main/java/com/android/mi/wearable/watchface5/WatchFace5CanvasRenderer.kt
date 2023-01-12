@@ -69,6 +69,11 @@ class WatchFace3CanvasRenderer(
         color = Color.WHITE
     }
 
+    private val roundPaint7 = Paint().apply {
+        isAntiAlias = true
+        color = Color.WHITE
+    }
+
     //绘制圆形的笔
     private val roundPaint5 = Paint().apply {
         isAntiAlias = true
@@ -764,9 +769,9 @@ class WatchFace3CanvasRenderer(
                 canvas.drawText(weekday,343f,190f,style5Paint4)
 
                 //绘制圆形
-                roundPaint.style = Paint.Style.STROKE
-                roundPaint.strokeWidth = 3f
-                canvas.drawCircle(350f,180f,15f,roundPaint)
+                roundPaint5.style = Paint.Style.STROKE
+                roundPaint5.strokeWidth = 3f
+                canvas.drawCircle(350f,180f,15f,roundPaint5)
                 canvas.save()
             }
         }else if(watchFaceData.shapeStyle.shapeType == STYLE5 &&drawAmbient){
@@ -809,6 +814,9 @@ class WatchFace3CanvasRenderer(
 
         //style6 样式正确
         if (watchFaceData.shapeStyle.shapeType == STYLE6&&!drawAmbient){
+            style6Paint1.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
+            style6Paint2.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
+
             when (watchFaceData.positionStyle.positionStyle) {
                 PositionStyle1 -> {
                     //绘制当前的时间
@@ -897,6 +905,9 @@ class WatchFace3CanvasRenderer(
         //style7 样式正确
         if (watchFaceData.shapeStyle.shapeType == STYLE7&&!drawAmbient){
             //经当前笔的样式绘制下来
+            style7Paint1.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
+            style7Paint2.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
+
             if (watchFaceData.positionStyle.positionStyle == PositionStyle1){
                 //绘制旋转时间
                 val timeArray = BitmapTranslateUtils.currentTime17()
@@ -1540,6 +1551,10 @@ class WatchFace3CanvasRenderer(
 
         //style8 样式正确
         if (watchFaceData.shapeStyle.shapeType == STYLE8 && !drawAmbient){
+            style8Paint1.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
+            style8Paint2.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
+            style8Paint3.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
+            roundPaint7.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
             if (watchFaceData.positionStyle.positionStyle == PositionStyle1){
                 //绘制月份
                 canvas.drawText(BitmapTranslateUtils.currentData(),392f,250f,style8Paint1)
@@ -1551,12 +1566,12 @@ class WatchFace3CanvasRenderer(
                 canvas.drawText(week[1],226f,60f,style8Paint2)
                 canvas.drawText(week[2],226f,82f,style8Paint2)
                 //绘制线
-                roundPaint.style = Paint.Style.STROKE
-                roundPaint.strokeWidth = 1f
-                canvas.drawArc(43f,43f,426f,426f,-8f,-74f,false,roundPaint)
-                canvas.drawArc(43f,43f,426f,426f,188f,74f,false,roundPaint)
+                roundPaint7.style = Paint.Style.STROKE
+                roundPaint7.strokeWidth = 1f
+                canvas.drawArc(43f,43f,426f,426f,-8f,-74f,false,roundPaint7)
+                canvas.drawArc(43f,43f,426f,426f,188f,74f,false,roundPaint7)
                 //绘制带有圆弧的矩形
-                canvas.drawRoundRect(220f,15f,246f,88f,5.56f,5.56f,roundPaint)
+                canvas.drawRoundRect(220f,15f,246f,88f,5.56f,5.56f,roundPaint7)
                 canvas.save()
             }else if (watchFaceData.positionStyle.positionStyle == PositionStyle2){
                 //绘制月份
@@ -1570,12 +1585,12 @@ class WatchFace3CanvasRenderer(
                 canvas.drawText(week[1],226f,429f,style8Paint2)
                 canvas.drawText(week[2],226f,447f,style8Paint2)
                 //绘制线
-                roundPaint.style = Paint.Style.STROKE
-                roundPaint.strokeWidth = 1f
-                canvas.drawArc(43f,43f,426f,426f,8f,74f,false,roundPaint)
-                canvas.drawArc(43f,43f,426f,426f,98f,74f,false,roundPaint)
+                roundPaint7.style = Paint.Style.STROKE
+                roundPaint7.strokeWidth = 1f
+                canvas.drawArc(43f,43f,426f,426f,8f,74f,false,roundPaint7)
+                canvas.drawArc(43f,43f,426f,426f,98f,74f,false,roundPaint7)
                 //绘制带有圆弧的矩形
-                canvas.drawRoundRect(220f,391f,246f,457f,5.56f,5.56f,roundPaint)
+                canvas.drawRoundRect(220f,391f,246f,457f,5.56f,5.56f,roundPaint7)
                 canvas.save()
             }else if (watchFaceData.positionStyle.positionStyle == PositionStyle3){
                 //绘制月份高位低位
@@ -1587,12 +1602,12 @@ class WatchFace3CanvasRenderer(
                 //绘制星期
                 canvas.drawText(BitmapTranslateUtils.currentWeekdayNotAll(),21f,245f,style8Paint3)
                 //绘制线
-                roundPaint.style = Paint.Style.STROKE
-                roundPaint.strokeWidth = 1f
-                canvas.drawArc(43f,43f,426f,426f,-172f,74f,false,roundPaint)
-                canvas.drawArc(43f,43f,426f,426f,98f,74f,false,roundPaint)
+                roundPaint7.style = Paint.Style.STROKE
+                roundPaint7.strokeWidth = 1f
+                canvas.drawArc(43f,43f,426f,426f,-172f,74f,false,roundPaint7)
+                canvas.drawArc(43f,43f,426f,426f,98f,74f,false,roundPaint7)
                 //绘制带有圆弧的矩形
-                canvas.drawRoundRect(9f,225f,75f,247f,5.56f,5.56f,roundPaint)
+                canvas.drawRoundRect(9f,225f,75f,247f,5.56f,5.56f,roundPaint7)
                 canvas.save()
             }
         }else if (watchFaceData.shapeStyle.shapeType == STYLE8 && drawAmbient){
@@ -1602,6 +1617,7 @@ class WatchFace3CanvasRenderer(
 
         //style9 样式正确
         if (watchFaceData.shapeStyle.shapeType == STYLE9&&!drawAmbient){
+            style9Paint1.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
             if (watchFaceData.positionStyle.positionStyle == PositionStyle1){
                 canvas.drawText(BitmapTranslateUtils.currentTime(),80f,129f,style9Paint1)
                 canvas.drawText(BitmapTranslateUtils.currentDay9(),80f,189f,style9Paint1)
