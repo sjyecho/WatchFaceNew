@@ -27,6 +27,7 @@ import java.time.Duration
 import java.time.ZonedDateTime
 import java.util.Calendar
 import kotlin.math.abs
+import kotlin.math.log
 
 
 // Default for how long each frame is displayed at expected frame rate.
@@ -52,6 +53,7 @@ class WatchFace3CanvasRenderer(
      * 相册表表盘的字体文件
      */
     //TODO 现在统一用运动ttf代替后期需要替换
+    private var watchFaceData: WatchFaceData = WatchFaceData()
     private val textPaint = Paint().apply {
         isAntiAlias = true
     }
@@ -67,10 +69,16 @@ class WatchFace3CanvasRenderer(
         color = Color.WHITE
     }
 
+    //绘制圆形的笔
+    private val roundPaint5 = Paint().apply {
+        isAntiAlias = true
+        color = Color.WHITE
+    }
+
     //style1paint
     private val style1Paint1 = Paint().apply {
         typeface = Typeface.createFromAsset(context.assets,"fonts/BalooChettan2-Bold.ttf")
-        color = Color.WHITE
+        color = context.getColor(watchFaceData.activeColorStyle.colorInt)
         textSize = 104f
         isAntiAlias = true
     }
@@ -288,7 +296,7 @@ class WatchFace3CanvasRenderer(
     private val scope: CoroutineScope =
         CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
-    private var watchFaceData: WatchFaceData = WatchFaceData()
+
 
     init {
         /**
@@ -396,6 +404,7 @@ class WatchFace3CanvasRenderer(
         if (watchFaceData.shapeStyle.shapeType == STYLE1&&!drawAmbient){
             val textWidth: Float = style1Paint1.measureText(BitmapTranslateUtils.currentTime())
             val baseLineY: Float = abs(style1Paint1.ascent() + style1Paint1.descent()) / 2
+            style1Paint1.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
             if (watchFaceData.positionStyle.positionStyle == PositionStyle1){
                 canvas.drawText(BitmapTranslateUtils.currentTime(),233f-textWidth / 2, baseLineY+340f,style1Paint1)
             }else if (watchFaceData.positionStyle.positionStyle == PositionStyle2){
@@ -424,8 +433,9 @@ class WatchFace3CanvasRenderer(
             //当前字体的样式
             val textWidth: Float = style2paint1.measureText(BitmapTranslateUtils.currentWeekdayAll())
             //绘制当前的星期
+            style2paint1.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
             when (watchFaceData.positionStyle.positionStyle) {
-                PositionStyle1 -> {
+                 PositionStyle1 -> {
                     canvas.drawText(BitmapTranslateUtils.currentWeekdayAll(),233f-textWidth / 2,146f,style2paint1)
                 }
                 PositionStyle2 -> {
@@ -463,16 +473,23 @@ class WatchFace3CanvasRenderer(
             textBoardPaint.typeface = Typeface.createFromAsset(context.assets,"fonts/RobotoText-Regular.otf")
             textBoardPaint.color = Color.WHITE
             textBoardPaint.textSize = 42f
+
            if (watchFaceData.positionStyle.positionStyle == PositionStyle1){
+               style3Paint1.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
+               textBoardPaint.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
                var textWidth: Float = style3Paint1.measureText(BitmapTranslateUtils.currentTime())
                canvas.drawText(BitmapTranslateUtils.currentTime(),233f-textWidth/2,102f,style3Paint1)
                canvas.drawText(BitmapTranslateUtils.currentTime(),233f-textWidth/2,102f,textBoardPaint)
                //绘制星期
+               style3Paint2.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
                canvas.drawText(BitmapTranslateUtils.currentWeekdayNotAll(),240f,125f,style3Paint2)
                //绘制当前日期
                textWidth = style3Paint2.measureText(BitmapTranslateUtils.currentData())
                canvas.drawText(BitmapTranslateUtils.currentData(),233f-textWidth,125f,style3Paint2)
            }else if (watchFaceData.positionStyle.positionStyle == PositionStyle2) {
+               style3Paint1.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
+               textBoardPaint.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
+               style3Paint2.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
                var textWidth: Float = style3Paint1.measureText(BitmapTranslateUtils.currentTime())
                canvas.drawText(BitmapTranslateUtils.currentTime(),233f-textWidth/2,380f,style3Paint1)
                canvas.drawText(BitmapTranslateUtils.currentTime(),233f-textWidth/2,380f,textBoardPaint)
@@ -498,8 +515,15 @@ class WatchFace3CanvasRenderer(
 
         //style4 样式正确
         if (watchFaceData.shapeStyle.shapeType == STYLE4 && !drawAmbient){
+
             canvas.skew(0f,-0.15f)
+            style4Paint1.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
+            style4Paint2.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
+            style4Paint3.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
+            style4Paint4.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
+            roundPaint.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
             if (watchFaceData.positionStyle.positionStyle == PositionStyle1){
+
                 /**
                  * paint1
                  */
@@ -532,7 +556,6 @@ class WatchFace3CanvasRenderer(
                  * paintround
                  */
                 //绘制包含秒的圆
-                roundPaint.color = Color.WHITE
                 roundPaint.style = Paint.Style.STROKE
                 roundPaint.strokeWidth = 3f
                 canvas.drawCircle(285f,135f,18f,roundPaint)
@@ -588,7 +611,6 @@ class WatchFace3CanvasRenderer(
                 canvas.drawText(timeSign,230f,375f,style4Paint3)
 
                 //绘制包含秒的圆
-                roundPaint.color = Color.WHITE
                 roundPaint.style = Paint.Style.STROKE
                 roundPaint.strokeWidth = 3f
                 canvas.drawCircle(285f,375f,18f,roundPaint)
@@ -617,6 +639,10 @@ class WatchFace3CanvasRenderer(
                 canvas.drawBitmap(batteryIcon,308f,383f,style4Paint4)
             }
         }else if (watchFaceData.shapeStyle.shapeType == STYLE4 && drawAmbient){
+            style4Paint1.color = Color.WHITE
+            style4Paint2.color = Color.WHITE
+            style4Paint3.color = Color.WHITE
+            style4Paint4.color = Color.WHITE
             canvas.skew(0f,-0.15f)
             //绘制当前的月份
             canvas.drawText(BitmapTranslateUtils.currentMonth4(),150f,235f,style4Paint1)
@@ -667,6 +693,11 @@ class WatchFace3CanvasRenderer(
 
         //style5 样式正确
         if (watchFaceData.shapeStyle.shapeType == STYLE5 &&!drawAmbient){
+            style5Paint1.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
+            style5Paint2.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
+            style5Paint3.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
+            style5Paint4.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
+            roundPaint5.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
             if (watchFaceData.positionStyle.positionStyle == PositionStyle1){
                 //绘month
                 canvas.drawText(BitmapTranslateUtils.currentMonth4(),40f,193f,style5Paint1)
@@ -698,9 +729,9 @@ class WatchFace3CanvasRenderer(
                 canvas.drawText(weekday,143f,190f,style5Paint4)
 
                 //绘制圆形
-                roundPaint.style = Paint.Style.STROKE
-                roundPaint.strokeWidth = 3f
-                canvas.drawCircle(150f,180f,15f,roundPaint)
+                roundPaint5.style = Paint.Style.STROKE
+                roundPaint5.strokeWidth = 3f
+                canvas.drawCircle(150f,180f,15f,roundPaint5)
             }else if (watchFaceData.positionStyle.positionStyle == PositionStyle2){
 
                 //绘month

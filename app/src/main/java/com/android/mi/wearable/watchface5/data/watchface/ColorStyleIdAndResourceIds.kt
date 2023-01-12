@@ -150,7 +150,7 @@ enum class ColorStyleIdAndResourceIds(
     val id: String,
     @StringRes val nameResourceId: Int,
     @DrawableRes val watchFaceStyle: Int,
-    @StringRes val colorInt: Int
+     val colorInt: Int
 ) {
     COLOR1(
         id = COLOR_STYLE1_ID,
