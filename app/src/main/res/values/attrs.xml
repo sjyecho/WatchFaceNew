@@ -11,18 +11,82 @@
 
         <attr name="iv_anchor_color_level_1" format="color" />
         <attr name="iv_anchor_color_level_2" format="color" />
-        <attr name="iv_anchor_color_level_21" format="color" />
-        <attr name="iv_anchor_color_level_22" format="color" />
-        <attr name="iv_anchor_color_level_23" format="color" />
         <attr name="iv_anchor_color_level_3" format="color" />
         <attr name="iv_anchor_color_level_4" format="color" />
         <attr name="iv_anchor_is_colorful" format="boolean" />
         <attr name="iv_anchor_color_level_5" format="color" />
+        <attr name="iv_anchor_color_level_6" format="color" />
+        <attr name="iv_anchor_color_level_7" format="color" />
+        <attr name="iv_anchor_color_level_8" format="color" />
+        <attr name="iv_anchor_color_level_9" format="color" />
+        <attr name="iv_anchor_color_level_10" format="color" />
+        <attr name="iv_anchor_color_level_11" format="color" />
+        <attr name="iv_anchor_color_level_12" format="color" />
+        <attr name="iv_anchor_color_level_13" format="color" />
+        <attr name="iv_anchor_color_level_14" format="color" />
+        <attr name="iv_anchor_color_level_15" format="color" />
+        <attr name="iv_anchor_color_level_16" format="color" />
+        <attr name="iv_anchor_color_level_17" format="color" />
+        <attr name="iv_anchor_color_level_18" format="color" />
+        <attr name="iv_anchor_color_level_19" format="color" />
+        <attr name="iv_anchor_color_level_20" format="color" />
+        <attr name="iv_anchor_color_level_21" format="color" />
+        <attr name="iv_anchor_color_level_22" format="color" />
+        <attr name="iv_anchor_color_level_23" format="color" />
+        <attr name="iv_anchor_color_level_24" format="color" />
+        <attr name="iv_anchor_color_level_25" format="color" />
+        <attr name="iv_anchor_color_level_26" format="color" />
+        <attr name="iv_anchor_color_level_27" format="color" />
+        <attr name="iv_anchor_color_level_28" format="color" />
+        <attr name="iv_anchor_color_level_29" format="color" />
+        <attr name="iv_anchor_color_level_30" format="color" />
+        <attr name="iv_anchor_color_level_31" format="color" />
+        <attr name="iv_anchor_color_level_32" format="color" />
+        <attr name="iv_anchor_color_level_33" format="color" />
+        <attr name="iv_anchor_color_level_34" format="color" />
+        <attr name="iv_anchor_color_level_35" format="color" />
+        <attr name="iv_anchor_color_level_36" format="color" />
+
 
         <attr name="iv_anchor_size_level_1" format="integer" />
         <attr name="iv_anchor_size_level_2" format="integer" />
         <attr name="iv_anchor_size_level_3" format="integer" />
         <attr name="iv_anchor_size_level_4" format="integer" />
         <attr name="iv_anchor_size_level_5" format="integer" />
+        <attr name="iv_anchor_size_level_6" format="integer" />
+        <attr name="iv_anchor_size_level_7" format="integer" />
+        <attr name="iv_anchor_size_level_8" format="integer" />
+        <attr name="iv_anchor_size_level_9" format="integer" />
+        <attr name="iv_anchor_size_level_10" format="integer" />
+        <attr name="iv_anchor_size_level_11" format="integer" />
+        <attr name="iv_anchor_size_level_12" format="integer" />
+        <attr name="iv_anchor_size_level_13" format="integer" />
+        <attr name="iv_anchor_size_level_14" format="integer" />
+        <attr name="iv_anchor_size_level_15" format="integer" />
+        <attr name="iv_anchor_size_level_16" format="integer" />
+        <attr name="iv_anchor_size_level_17" format="integer" />
+        <attr name="iv_anchor_size_level_18" format="integer" />
+        <attr name="iv_anchor_size_level_19" format="integer" />
+        <attr name="iv_anchor_size_level_20" format="integer" />
+        <attr name="iv_anchor_size_level_21" format="integer" />
+        <attr name="iv_anchor_size_level_22" format="integer" />
+        <attr name="iv_anchor_size_level_23" format="integer" />
+        <attr name="iv_anchor_size_level_24" format="integer" />
+        <attr name="iv_anchor_size_level_25" format="integer" />
+        <attr name="iv_anchor_size_level_26" format="integer" />
+        <attr name="iv_anchor_size_level_27" format="integer" />
+        <attr name="iv_anchor_size_level_28" format="integer" />
+        <attr name="iv_anchor_size_level_29" format="integer" />
+        <attr name="iv_anchor_size_level_30" format="integer" />
+        <attr name="iv_anchor_size_level_31" format="integer" />
+        <attr name="iv_anchor_size_level_32" format="integer" />
+        <attr name="iv_anchor_size_level_33" format="integer" />
+        <attr name="iv_anchor_size_level_34" format="integer" />
+        <attr name="iv_anchor_size_level_35" format="integer" />
+        <attr name="iv_anchor_size_level_36" format="integer" />
+
+
+
+
     </declare-styleable>
 </resources>

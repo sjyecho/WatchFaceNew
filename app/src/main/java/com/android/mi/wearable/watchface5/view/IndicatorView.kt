@@ -53,11 +53,6 @@ class IndicatorView @JvmOverloads constructor(
     // 绘制Dot的Paint
     private val mDotPaint by lazy { Paint().apply { isAntiAlias = true } }
 
-    private  val colorArray = intArrayOf(R.color.index_21_bg, R.color.index_22_bg, R.color.index_23_bg)
-
-    // 是否支持多彩
-    private var isColorFul = false
-
     // 绘制圆环的Paint
     private val mRingPaint by lazy {
         Paint().apply {
@@ -76,25 +71,86 @@ class IndicatorView @JvmOverloads constructor(
             mRingRadius = getFloat(R.styleable.IndicatorView_iv_ring_radius, mRingRadius)
             mRingStroke = getDimension(R.styleable.IndicatorView_iv_ring_stroke, mRingStroke)
             mRingPaint.strokeWidth = mRingStroke
-            mDotIntervalAngle = getFloat(R.styleable.IndicatorView_iv_dot_interval_angle, mDotIntervalAngle)
-            val colorList =
-                listOf(
-                    getInt(R.styleable.IndicatorView_iv_anchor_color_level_1, Color.WHITE),
-                    getInt(R.styleable.IndicatorView_iv_anchor_color_level_2, Color.GRAY),
-                    getInt(R.styleable.IndicatorView_iv_anchor_color_level_3, Color.GRAY),
-                    getInt(R.styleable.IndicatorView_iv_anchor_color_level_4, Color.GRAY),
-                    getInt(R.styleable.IndicatorView_iv_anchor_color_level_5, Color.GRAY)
+            mDotIntervalAngle = getFloat(R.styleable.IndicatorView_iv_dot_interval_angle, mDotIntervalAngle)-2
+            val colorList = listOf(
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_1, Color.WHITE),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_2, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_3, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_4, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_5, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_6, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_7, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_8, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_9, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_10, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_11, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_12, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_13, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_14, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_16, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_17, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_18, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_19, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_20, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_21, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_22, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_23, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_24, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_25, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_26, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_27, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_28, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_29, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_30, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_31, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_32, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_33, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_34, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_35, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_36, Color.GRAY),
                 )
-
             val sizeList = listOf(
                 getFloat(R.styleable.IndicatorView_iv_anchor_size_level_1, 0f),
                 getFloat(R.styleable.IndicatorView_iv_anchor_size_level_2, 0f),
                 getFloat(R.styleable.IndicatorView_iv_anchor_size_level_3, 0f),
                 getFloat(R.styleable.IndicatorView_iv_anchor_size_level_4, 0f),
                 getFloat(R.styleable.IndicatorView_iv_anchor_size_level_5, 0f),
-            )
+                getFloat(R.styleable.IndicatorView_iv_anchor_size_level_6, 0f),
+                getFloat(R.styleable.IndicatorView_iv_anchor_size_level_7, 0f),
+                getFloat(R.styleable.IndicatorView_iv_anchor_size_level_8, 0f),
+                getFloat(R.styleable.IndicatorView_iv_anchor_size_level_9, 0f),
+                getFloat(R.styleable.IndicatorView_iv_anchor_size_level_10, 0f),
+                getFloat(R.styleable.IndicatorView_iv_anchor_size_level_11, 0f),
+                getFloat(R.styleable.IndicatorView_iv_anchor_size_level_12, 0f),
+                getFloat(R.styleable.IndicatorView_iv_anchor_size_level_13, 0f),
+                getFloat(R.styleable.IndicatorView_iv_anchor_size_level_14, 0f),
+                getFloat(R.styleable.IndicatorView_iv_anchor_size_level_15, 0f),
+                getFloat(R.styleable.IndicatorView_iv_anchor_size_level_16, 0f),
+                getFloat(R.styleable.IndicatorView_iv_anchor_size_level_17, 0f),
+                getFloat(R.styleable.IndicatorView_iv_anchor_size_level_18, 0f),
+                getFloat(R.styleable.IndicatorView_iv_anchor_size_level_19, 0f),
+                getFloat(R.styleable.IndicatorView_iv_anchor_size_level_20, 0f),
+                getFloat(R.styleable.IndicatorView_iv_anchor_size_level_21, 0f),
+                getFloat(R.styleable.IndicatorView_iv_anchor_size_level_22, 0f),
+                getFloat(R.styleable.IndicatorView_iv_anchor_size_level_23, 0f),
+                getFloat(R.styleable.IndicatorView_iv_anchor_size_level_24, 0f),
+                getFloat(R.styleable.IndicatorView_iv_anchor_size_level_25, 0f),
+                getFloat(R.styleable.IndicatorView_iv_anchor_size_level_26, 0f),
+                getFloat(R.styleable.IndicatorView_iv_anchor_size_level_27, 0f),
+                getFloat(R.styleable.IndicatorView_iv_anchor_size_level_28, 0f),
+                getFloat(R.styleable.IndicatorView_iv_anchor_size_level_29, 0f),
+                getFloat(R.styleable.IndicatorView_iv_anchor_size_level_30, 0f),
+                getFloat(R.styleable.IndicatorView_iv_anchor_size_level_31, 0f),
+                getFloat(R.styleable.IndicatorView_iv_anchor_size_level_32, 0f),
+                getFloat(R.styleable.IndicatorView_iv_anchor_size_level_33, 0f),
+                getFloat(R.styleable.IndicatorView_iv_anchor_size_level_34, 0f),
+                getFloat(R.styleable.IndicatorView_iv_anchor_size_level_35, 0f),
+                getFloat(R.styleable.IndicatorView_iv_anchor_size_level_36, 0f),
+
+
+                )
             generateAnchor(colorList, sizeList)
-            generateDot(dotCount)
+//            generateDot(dotCount)
             generateDotList(dotCount, colorList)
         }.recycle()
     }
@@ -137,10 +193,8 @@ class IndicatorView @JvmOverloads constructor(
         val filterSizeList = sizeList.filter { it > 0 }
         if (filterSizeList.size > colorList.size) return
         mDotAnchorList.clear()
-        var isColorful:Boolean
         filterSizeList.forEachIndexed { i, size ->
-            isColorful = i == 1
-            mDotAnchorList.add(DotItem(angle = (mRingAngle + i * mDotIntervalAngle) % 360, size = size, color =  colorList[i]))
+            mDotAnchorList.add(DotItem((mRingAngle + i * mDotIntervalAngle) % 360, size, colorList[i]))
             mDotAnchorList.add(DotItem((mRingAngle - i * mDotIntervalAngle) % 360, size, colorList[i]))
         }
         mDotAnchorList.distinctBy { it.angle }
@@ -158,13 +212,9 @@ class IndicatorView @JvmOverloads constructor(
     }
 
     private fun generateDotList(dotCount: Int, colorList: List<Int>) {
-        val bitmapList = listOf(
-            R.drawable.dot1,
-            R.drawable.dot2,
-        )
         mDotItemList.clear()
-        (0 until dotCount).forEach {
-            mDotItemList.add(DotItem(angle = (mRingAngle + it * mDotIntervalAngle) % 360, color = bitmapList[it]))
+        (0 until dotCount-1).forEach {
+            mDotItemList.add(DotItem(angle = (mRingAngle + it * mDotIntervalAngle) % 360, color = colorList[it]))
         }
     }
 
@@ -181,18 +231,7 @@ class IndicatorView @JvmOverloads constructor(
         withTranslation(measuredWidth / 2f, measuredHeight / 2f) {
             withRotation(dotItem.angle - mScrollAngle) {
                 refreshDot(dotItem)
-
-                var bitmap = BitmapFactory.decodeResource(context.resources,dotItem.color)
-                //drawCircle(mScrollRadius, 0f, dotItem.size, mDotPaint.apply { color = dotItem.color })
-                var bmpW = bitmap.width;
-                var bmpH = bitmap.height;
-                val scaleWidth = (2f * dotItem.size)  / bmpW
-                val scaleHeight = (2f  * dotItem.size) / bmpH
-
-                val matrix = Matrix()
-                matrix.postScale(scaleWidth, scaleHeight)
-                bitmap = Bitmap.createBitmap(bitmap, 0, 0, bmpW, bmpH, matrix, true);
-                drawBitmap(bitmap,mScrollRadius - dotItem.size  , dotItem.size - bitmap.height  , mDotPaint)
+                drawCircle(mScrollRadius, 0f, dotItem.size, mDotPaint.apply { color = dotItem.color })
             }
         }
     }

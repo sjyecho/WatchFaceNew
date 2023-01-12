@@ -24,6 +24,51 @@
     <!-- Name of watchface style [CHAR LIMIT=20] -->
     <string name="yellow_style_name">Yellow Style</string>
 
+<!--    显示当前的color-->
+    <string name="color_style_1">Color Style1</string>
+    <string name="color_style_2">Color Style2</string>
+    <string name="color_style_3">Color Style3</string>
+    <string name="color_style_4">Color Style4</string>
+    <string name="color_style_5">Color Style5</string>
+    <string name="color_style_6">Color Style6</string>
+    <string name="color_style_7">Color Style7</string>
+    <string name="color_style_8">Color Style8</string>
+    <string name="color_style_9">Color Style9</string>
+    <string name="color_style_10">Color Style10</string>
+    <string name="color_style_11">Color Style11</string>
+    <string name="color_style_12">Color Style12</string>
+    <string name="color_style_13">Color Style13</string>
+    <string name="color_style_14">Color Style14</string>
+    <string name="color_style_15">Color Style15</string>
+    <string name="color_style_16">Color Style16</string>
+    <string name="color_style_17">Color Style17</string>
+    <string name="color_style_18">Color Style18</string>
+    <string name="color_style_19">Color Style19</string>
+    <string name="color_style_20">Color Style20</string>
+    <string name="color_style_21">Color Style21</string>
+    <string name="color_style_22">Color Style22</string>
+    <string name="color_style_23">Color Style23</string>
+    <string name="color_style_24">Color Style24</string>
+    <string name="color_style_25">Color Style25</string>
+    <string name="color_style_26">Color Style26</string>
+    <string name="color_style_27">Color Style27</string>
+    <string name="color_style_28">Color Style28</string>
+    <string name="color_style_29">Color Style29</string>
+    <string name="color_style_30">Color Style30</string>
+    <string name="color_style_31">Color Style31</string>
+    <string name="color_style_32">Color Style32</string>
+    <string name="color_style_33">Color Style33</string>
+    <string name="color_style_34">Color Style34</string>
+    <string name="color_style_35">Color Style35</string>
+    <string name="color_style_36">Color Style36</string>
+
+
+
+
+
+
+
+
     <!-- Name of watchface style [CHAR LIMIT=20] -->
     <string name="blue_style_name">Blue Style</string>
 
@@ -31,6 +76,12 @@
     <string name="shape_style_setting">Shape</string>
 
     <string name="position_style_setting">Position</string>
+
+
+
+
+
+
 
 
 

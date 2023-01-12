@@ -53,6 +53,49 @@
     <color name="white_background_color">@color/dark_gray</color>
     <color name="white_outer_element_color">@color/white_70</color>
 
+    <color name="color1">#FFFFFF</color>
+    <color name="color2">#000000</color>
+    <color name="color3">#F22424</color>
+    <color name="color4">#FF7433</color>
+    <color name="color5">#FFBB00</color>
+    <color name="color6">#FFE600</color>
+    <color name="color7">#FFF7CA</color>
+    <color name="color8">#2DE370 </color>
+    <color name="color9">#01B58C</color>
+    <color name="color10">#0D84FF</color>
+    <color name="color11">#023AFF</color>
+    <color name="color12">#7B51F0</color>
+    <color name="color13">#D4C6FF</color>
+    <color name="color14">#F4DDD0</color>
+    <color name="color15">#92857C</color>
+    <color name="color16">#855F45</color>
+    <color name="color17">#844B3E</color>
+    <color name="color18">#4A3739</color>
+    <color name="color19">#AF967C</color>
+    <color name="color20">#ADAA89</color>
+    <color name="color21">#E2DECC</color>
+    <color name="color22">#9B9F99</color>
+    <color name="color23">#D9D9D9</color>
+    <color name="color24">#655B72</color>
+    <color name="color25">#FFD6BF</color>
+    <color name="color26">#E7E9AD</color>
+    <color name="color27">#FFCBE4</color>
+    <color name="color28">#C1F0FF</color>
+    <color name="color29">#DAEFC5</color>
+    <color name="color30">#5D59FF</color>
+    <color name="color31">#FDBBF9</color>
+    <color name="color32">#438DA5</color>
+    <color name="color33">#253152</color>
+    <color name="color34">#FF239A</color>
+    <color name="color35">#B7041A</color>
+    <color name="color36">#0A822E</color>
+
+
+
+
+
+
+
 
 
 
