@@ -12,15 +12,16 @@ import androidx.wear.watchface.style.UserStyle
 import androidx.wear.watchface.style.UserStyleSchema
 import androidx.wear.watchface.style.UserStyleSetting
 import androidx.wear.watchface.style.WatchFaceLayer
-import com.android.mi.wearable.watchface5.utils.COLOR_STYLE_SETTING
-import com.android.mi.wearable.watchface5.utils.POSITION_STYLE_SETTING
-import com.android.mi.wearable.watchface5.utils.SHAPE_STYLE_SETTING
+import com.android.mi.wearable.watchface5.R
+import com.android.mi.wearable.watchface5.utils.*
+import com.android.mi.wearable.watchface5.utils.LEFT_COMPLICATION_ID
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
-class WatchFaceConfigStateHolder (
+class WatchFaceConfigStateHolder(
     private val scope: CoroutineScope,
-    private val activity: ComponentActivity){
+    private val activity: ComponentActivity
+) {
     private lateinit var editorSession: EditorSession
 
     // Keys from Watch Face Data Structure
@@ -32,7 +33,7 @@ class WatchFaceConfigStateHolder (
     // Keys from Watch Face Data Structure
     private lateinit var positionStyleKey: UserStyleSetting.ListUserStyleSetting
 
-//    var pageType: Int = 0
+    var pageType: Int = 0
     val uiState: StateFlow<EditWatchFaceUiState> =
         flow<EditWatchFaceUiState> {
             editorSession = EditorSession.createOnWatchEditorSession(
@@ -85,17 +86,24 @@ class WatchFaceConfigStateHolder (
     }
 
 
-    fun createWatchFacePreview(): Bitmap{
-//        val highlightLayer = if (showHighlightLayer) RenderParameters.HighlightLayer(
-//            RenderParameters.HighlightedElement.AllComplicationSlots,
-//            activity.getColor(R.color.complication_border), // Red complication highlight.
-//            Color.argb(128, 0, 0, 0) // Darken everything else.
-//        ) else null
+    fun createWatchFacePreview(showHighlightLayer: Boolean, topOrBottom: Int): Bitmap {
+
+        val highlightLayer1 = if (showHighlightLayer) RenderParameters.HighlightLayer(
+            RenderParameters.HighlightedElement.ComplicationSlot(topOrBottom),
+            activity.getColor(R.color.complication_border), // Red complication highlight.
+            Color.argb(128, 0, 0, 0) // Darken everything else.
+        ) else null
+
+        val highlightLayer = if (showHighlightLayer) RenderParameters.HighlightLayer(
+            RenderParameters.HighlightedElement.AllComplicationSlots,
+            activity.getColor(R.color.complication_border), // Red complication highlight.
+            Color.argb(128, 0, 0, 0) // Darken everything else.
+        ) else null
         return editorSession.renderWatchFaceToBitmap(
             RenderParameters(
                 DrawMode.INTERACTIVE,
                 WatchFaceLayer.ALL_WATCH_FACE_LAYERS,
-                null
+                highlightLayer1
             ),
             editorSession.previewReferenceInstant,
             editorSession.complicationsPreviewData.value
@@ -119,18 +127,37 @@ class WatchFaceConfigStateHolder (
             complicationsPreviewData
         )
 
-        val colorStyle = userStyle[colorStyleKey] as UserStyleSetting.ListUserStyleSetting.ListOption
-        val shapeStyle = userStyle[shapeStyleKey] as UserStyleSetting.ListUserStyleSetting.ListOption
-        val positionStyle = userStyle[positionStyleKey] as UserStyleSetting.ListUserStyleSetting.ListOption
+        val colorStyle =
+            userStyle[colorStyleKey] as UserStyleSetting.ListUserStyleSetting.ListOption
+        val shapeStyle =
+            userStyle[shapeStyleKey] as UserStyleSetting.ListUserStyleSetting.ListOption
+        val positionStyle =
+            userStyle[positionStyleKey] as UserStyleSetting.ListUserStyleSetting.ListOption
 
         return UserStylesAndPreview(
             colorStyleId = colorStyle.id.toString(),
             shapeStyleId = shapeStyle.id.toString(),
-            positionStyleId =positionStyle.id.toString(),
+            positionStyleId = positionStyle.id.toString(),
             previewImage = bitmap
         )
     }
 
+    fun setComplication(complicationLocation: Int) {
+        val complicationSlotId = when (complicationLocation) {
+            LEFT_COMPLICATION_ID -> {
+                LEFT_COMPLICATION_ID
+            }
+            RIGHT_COMPLICATION_ID -> {
+                RIGHT_COMPLICATION_ID
+            }
+            else -> {
+                return
+            }
+        }
+        scope.launch(Dispatchers.Main.immediate) {
+            editorSession.openComplicationDataSourceChooser(complicationSlotId)
+        }
+    }
 
     fun setColorStyle(newColorStyleId: String) {
         val userStyleSettingList = editorSession.userStyleSchema.userStyleSettings
@@ -174,7 +201,6 @@ class WatchFaceConfigStateHolder (
             }
         }
     }
-
 
 
     fun setShapeStyle(newShapeStyleId: String) {

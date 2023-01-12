@@ -13,7 +13,9 @@
         android:gravity="center"
         android:layout_marginTop="10dp"
         android:text="Complications"
-        android:textSize="16sp"/>
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:fontFamily="sans-serif-black"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:background="@android:color/transparent"
@@ -22,24 +24,24 @@
         android:layout_height="@dimen/analog_complication_settings_preview_size">
 
         <Button
-            android:id="@+id/left_complication"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:id="@+id/top_complication"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
             android:contentDescription="LeftButton"
             android:background="@android:color/transparent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintWidth_percent="0.5" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintWidth_percent="0.5"/>
 
         <Button
-            android:id="@+id/right_complication"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:id="@+id/bottom_complication"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
             android:contentDescription="RightButton"
             android:background="@android:color/transparent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintWidth_percent="0.5" />
     </androidx.constraintlayout.widget.ConstraintLayout>

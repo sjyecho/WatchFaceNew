@@ -234,7 +234,6 @@ class IndicatorViewPosition @JvmOverloads constructor(
         }
 
         val length = bitmapList.size
-        Log.d("generateDotList", "length : $length")
         mDotItemList.clear()
         (0 until dotCount).forEach {
             mDotItemList.add(

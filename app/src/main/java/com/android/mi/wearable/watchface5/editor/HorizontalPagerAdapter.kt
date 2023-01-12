@@ -5,15 +5,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.android.mi.wearable.watchface5.R
+import com.android.mi.wearable.watchface5.WatchFaceService5
 import com.android.mi.wearable.watchface5.data.watchface.*
 import com.android.mi.wearable.watchface5.data.watchface.FinalStatic.Companion.currentStylePosition
 import com.android.mi.wearable.watchface5.view.IndicatorView
 import com.android.mi.wearable.watchface5.view.IndicatorViewPosition
 import com.android.mi.wearable.watchface5.view.IndicatorViewStyle
-import kotlin.math.log
 
 class HorizontalPagerAdapter(
     private val listener: IComplicationClick,
@@ -27,6 +28,9 @@ class HorizontalPagerAdapter(
     private var indicatorPosition: IndicatorViewPosition? = null
     private var mCurrentItem: Int = 0
 
+    private lateinit var topButton: Button
+    private lateinit var bottomButton: Button
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
         //style选择
@@ -36,7 +40,7 @@ class HorizontalPagerAdapter(
                     .inflate(R.layout.activity_watch_face_config_style, parent, false)
                 val indicator: IndicatorViewStyle = itemView.findViewById(R.id.indicatorViewStyle)
                 indicator.setOnDotSelectedListener {
-                    FinalStatic.currentStylePosition=it
+                    currentStylePosition = it
                     listener.onStylePagerSelected(it)
                     indicatorPosition?.setSelectedPosition1(it)
                 }
@@ -46,11 +50,13 @@ class HorizontalPagerAdapter(
                 //position选择
             }
             1 -> {
-                val itemView = LayoutInflater.from(parent.context).inflate(R.layout.activity_watch_face_config_position, parent, false)
+                val itemView = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.activity_watch_face_config_position, parent, false)
                 indicatorPosition = itemView.findViewById(R.id.indicatorViewPosition)
                 indicatorPosition?.setOnDotSelectedListener {
+                    Log.d("qwer", "it : $it")
                     FinalStatic.currentPositionPosition = it
-                    listener.onPositionSelected(it,watchType)
+                    listener.onPositionSelected(it, watchType)
                 }
                 indicatorPosition?.setSelectedPosition(positionPosition)
                 PositionViewHolder(itemView)
@@ -68,10 +74,18 @@ class HorizontalPagerAdapter(
                 ColorViewHolder(itemView)
 
             }
-            3->{
-                    val itemView = LayoutInflater.from(parent.context)
-                        .inflate(R.layout.activity_watch_face_config_complication, parent, false)
-                    ComplicationViewHolder(itemView)
+            3 -> {
+                val itemView = LayoutInflater.from(parent.context).inflate(R.layout.activity_watch_face_config_complication, parent, false)
+                topButton=itemView.findViewById(R.id.top_complication)
+                bottomButton=itemView.findViewById(R.id.bottom_complication)
+                if (currentStylePosition == 0 && FinalStatic.currentPositionPosition == 0){
+                    Log.d("3->", " position 1 --- 位置在下 ")
+                    topButton.visibility = View.GONE
+                }else if (currentStylePosition == 0 && FinalStatic.currentPositionPosition == 1){
+                    Log.d("3->", " position 2 --- 位置在上 ")
+                    bottomButton.visibility = View.GONE
+                }
+                ComplicationViewHolder(itemView)
 
             }
             else -> {
@@ -114,8 +128,14 @@ class HorizontalPagerAdapter(
 //            holder.mViewPager.currentItem = mCurrentItem
         } else if (holder is PositionViewHolder) {
             val complicationViewHolder = holder as PositionViewHolder
-        } else if (holder is ComplicationViewHolder){
+        } else if (holder is ComplicationViewHolder) {
             val complicationViewHolder = holder as ComplicationViewHolder
+            complicationViewHolder.topBt.setOnClickListener {
+                listener.onTopClick()
+            }
+            complicationViewHolder.bottomBt.setOnClickListener {
+                listener.onBottomClick()
+            }
         } else {
             val complicationViewHolder = holder as StyleViewHolder
         }
@@ -127,8 +147,7 @@ class HorizontalPagerAdapter(
     }
 
     override fun getItemCount(): Int {
-        if (currentStylePosition == STYLE1|| currentStylePosition == STYLE2||currentStylePosition == STYLE5 || currentStylePosition == STYLE6){
-            Log.d("wjjjj", "getItemCount: "+watchType)
+        if (currentStylePosition == STYLE1 || currentStylePosition == STYLE2 || currentStylePosition == STYLE5 || currentStylePosition == STYLE6) {
             return 4
         }
         return 3
@@ -145,6 +164,8 @@ class HorizontalPagerAdapter(
     }
 
     class ComplicationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val topBt: Button = itemView.findViewById(R.id.top_complication)
+        val bottomBt: Button = itemView.findViewById(R.id.bottom_complication)
     }
 }
 

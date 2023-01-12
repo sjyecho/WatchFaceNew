@@ -2,16 +2,15 @@ package com.android.mi.wearable.watchface5.editor
 
 import android.os.Bundle
 import android.util.Log
-import android.view.KeyEvent
 import android.view.View
-import android.window.OnBackInvokedDispatcher
 import androidx.activity.ComponentActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
-import androidx.wear.watchface.WatchFaceType
 import com.android.mi.wearable.watchface5.data.watchface.*
 import com.android.mi.wearable.watchface5.databinding.ActivityWatchFaceConfig5Binding
 import com.android.mi.wearable.watchface5.utils.BitmapTranslateUtils
+import com.android.mi.wearable.watchface5.utils.LEFT_COMPLICATION_ID
+import com.android.mi.wearable.watchface5.utils.RIGHT_COMPLICATION_ID
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -27,6 +26,8 @@ interface IComplicationClick {
     //位置
     fun onPositionPagerChange(isUp: Boolean)
 
+    fun onTopClick()
+    fun onBottomClick()
 
 }
 
@@ -112,7 +113,7 @@ class WatchFace5ConfigActivity : ComponentActivity(), IComplicationClick {
         stateHolder.setColorStyle(newColorStyle.id)
     }
 
-    override fun onPositionSelected(position: Int,watchType: Int) {
+    override fun onPositionSelected(position: Int, watchType: Int) {
         currentPositionPosition = position
         var positionStyleIdAndResourceIdsList = enumValues<PositionStyle>()
         val newPosition: PositionStyle = positionStyleIdAndResourceIdsList[currentPositionPosition]
@@ -129,6 +130,17 @@ class WatchFace5ConfigActivity : ComponentActivity(), IComplicationClick {
         myAdapter?.notifyItemChanged(2)
     }
 
+    override fun onTopClick() {
+        if (stateHolder.pageType == 3) {
+            stateHolder.setComplication(LEFT_COMPLICATION_ID)
+        }
+    }
+
+    override fun onBottomClick() {
+        if (stateHolder.pageType == 3) {
+            stateHolder.setComplication(RIGHT_COMPLICATION_ID)
+        }
+    }
 
 //    override fun onColorPagerChange(isUp: Boolean){
 //        val colorStyleIdAndResourceIdsList = enumValues<ColorStyleIdAndResourceIds>()
@@ -174,10 +186,43 @@ class WatchFace5ConfigActivity : ComponentActivity(), IComplicationClick {
             positionPosition = currentPositionPosition,
             watchType = WatchFaceData().shapeStyle.shapeType
         )
-        binding.pager.offscreenPageLimit = 1
+        binding.pager.offscreenPageLimit = ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
         binding.pager.apply {
             adapter = myAdapter
         }
+        binding.pager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                stateHolder.pageType = position
+                val isShowHighLayer: Boolean = position == 3
+                binding.preview.vPreviewMask.visibility =
+                    if (isShowHighLayer) View.GONE else View.VISIBLE
+//                binding.preview.leftHighlight.visibility= if (isShowHighLayer) View.VISIBLE else View.GONE
+//                binding.preview.rightHighlight.visibility= if (isShowHighLayer) View.VISIBLE else View.GONE
+                //TODO
+                if (FinalStatic.currentStylePosition == 0 && FinalStatic.currentPositionPosition == 0) {
+                    Log.d("qwer", "0 0 ")
+                    binding.preview.watchFaceBackground.setImageBitmap(
+                        stateHolder.createWatchFacePreview(
+                            isShowHighLayer,
+                            RIGHT_COMPLICATION_ID
+                        )
+                    )
+                } else if (FinalStatic.currentStylePosition == 0 && FinalStatic.currentPositionPosition == 1)
+                    Log.d("qwer", "0 1 ")
+                    binding.preview.watchFaceBackground.setImageBitmap(
+                        stateHolder.createWatchFacePreview(
+                            isShowHighLayer,
+                            LEFT_COMPLICATION_ID
+                        )
+                    )
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+                super.onPageScrollStateChanged(state)
+                Log.d("onPageScrollStateChanged", "onPageScrollStateChanged : $state")
+            }
+        })
     }
 
     fun onConfirmClick(view: View) {
