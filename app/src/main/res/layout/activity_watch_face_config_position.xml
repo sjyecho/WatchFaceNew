@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.mi.wearable.watchface5.view.SlideHandleView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:pageType="position"
+    android:background="@android:color/transparent"
+    app:openSlide="true">
+
+    <com.android.mi.wearable.watchface5.view.IndicatorViewPosition
+        android:id="@+id/indicatorViewPosition"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:focusable="true"
+        app:iv_anchor_is_colorful="true"
+        app:iv_anchor_size_level_1="13"
+        app:iv_anchor_size_level_2="11"
+        app:iv_dot_interval_angle="12"
+        app:iv_dot_count="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/white"
+        android:fontFamily="sans-serif-black"
+        android:textSize="16sp"
+        android:text="Position"
+        />
+
+</com.android.mi.wearable.watchface5.view.SlideHandleView>

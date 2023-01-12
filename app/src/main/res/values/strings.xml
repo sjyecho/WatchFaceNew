@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">WatchFace3</string>
+    <string name="message">Watch face tapped</string>
+    <string name="my_analog_name">逐光</string>
+    <string name="title_activity_watch_face_config">Configuration</string>
+
+    <!-- Name of watchface style category for selecting the color theme [CHAR LIMIT=20] -->
+    <string name="colors_style_setting">Colors</string>
+
+    <!-- Subtitle for the menu option to select the watch face color theme -->
+    <string name="colors_style_setting_description">Watchface color colorization</string>
+
+    <!-- Subtitle for the menu option to select the watch face color theme -->
+    <string name="shape_style_setting_description">Watchface shape colorization</string>
+
+    <string name="position_style_setting_description">Watchface position colorization</string>
+
+    <!-- Name of watchface style [CHAR LIMIT=20] -->
+    <string name="ambient_yellow_style_name">Ambient Yellow Style</string>
+
+    <!-- Name of watchface style [CHAR LIMIT=20] -->
+    <string name="ambient_blue_style_name">Ambient BLue Style</string>
+
+    <!-- Name of watchface style [CHAR LIMIT=20] -->
+    <string name="yellow_style_name">Yellow Style</string>
+
+    <!-- Name of watchface style [CHAR LIMIT=20] -->
+    <string name="blue_style_name">Blue Style</string>
+
+    <!-- Name of watchface style category for selecting the color theme [CHAR LIMIT=20] -->
+    <string name="shape_style_setting">Shape</string>
+
+    <string name="position_style_setting">Position</string>
+
+
+
+
+    <!-- Name of watchface style [CHAR LIMIT=20] -->
+    <string name="circle_shape_style_name">Circle Style</string>
+    <string name="square_shape_style_name">Square Style</string>
+    <string name="triangle_shape_style_name">Triangle Style</string>
+
+
+    <string name="one_style_name">One Style</string>
+    <string name="two_style_name">Two Style</string>
+    <string name="three_style_name">Three Style</string>
+    <string name="four_style_name">Four Style</string>
+    <string name="five_style_name">Five Style</string>
+    <string name="six_style_name">Six Style</string>
+    <string name="seven_style_name">Seven Style</string>
+    <string name="eight_style_name">Eight Style</string>
+    <string name="nine_style_name">Nine Style</string>
+
+    <string name="top_style_name">Top Style</string>
+    <string name="bottom_style_name">Bottom Style</string>
+    <string name="left_style_name">Left Style</string>
+    <string name="right_style_name">Right Style</string>
+</resources>

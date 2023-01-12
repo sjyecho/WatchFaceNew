@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="Complications"
+        android:textSize="16sp"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@android:color/transparent"
+        android:layout_gravity="center"
+        android:layout_width="@dimen/analog_complication_settings_preview_size"
+        android:layout_height="@dimen/analog_complication_settings_preview_size">
+
+        <Button
+            android:id="@+id/left_complication"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="LeftButton"
+            android:background="@android:color/transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintWidth_percent="0.5" />
+
+        <Button
+            android:id="@+id/right_complication"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="RightButton"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintWidth_percent="0.5" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

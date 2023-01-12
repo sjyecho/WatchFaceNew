@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="IndicatorView">
+        <attr name="iv_ring_color" format="color"/>
+        <attr name="iv_ring_angle" format="float"/>
+        <attr name="iv_ring_radius" format="float"/>
+        <attr name="iv_ring_stroke" format="dimension" />
+
+        <attr name="iv_dot_count" format="integer" />
+        <attr name="iv_dot_interval_angle" format="float"/>
+
+        <attr name="iv_anchor_color_level_1" format="color" />
+        <attr name="iv_anchor_color_level_2" format="color" />
+        <attr name="iv_anchor_color_level_21" format="color" />
+        <attr name="iv_anchor_color_level_22" format="color" />
+        <attr name="iv_anchor_color_level_23" format="color" />
+        <attr name="iv_anchor_color_level_3" format="color" />
+        <attr name="iv_anchor_color_level_4" format="color" />
+        <attr name="iv_anchor_is_colorful" format="boolean" />
+        <attr name="iv_anchor_color_level_5" format="color" />
+
+        <attr name="iv_anchor_size_level_1" format="integer" />
+        <attr name="iv_anchor_size_level_2" format="integer" />
+        <attr name="iv_anchor_size_level_3" format="integer" />
+        <attr name="iv_anchor_size_level_4" format="integer" />
+        <attr name="iv_anchor_size_level_5" format="integer" />
+    </declare-styleable>
+</resources>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.android.mi.wearable.watchface5.view.IndicatorView
+        android:id="@+id/indicatorView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:focusable="true"
+        app:iv_anchor_color_level_1="@color/index_1_bg"
+        app:iv_anchor_color_level_2="@color/index_2_bg"
+        app:iv_anchor_color_level_21="@color/index_21_bg"
+        app:iv_anchor_color_level_22="@color/index_22_bg"
+        app:iv_anchor_color_level_23="@color/index_23_bg"
+        app:iv_anchor_is_colorful="true"
+        app:iv_anchor_size_level_1="13"
+        app:iv_anchor_size_level_2="11"
+        app:iv_dot_interval_angle="12"
+        app:iv_ring_stroke="2px"
+        app:iv_dot_count="2"
+        app:iv_ring_angle="0"
+        app:iv_ring_radius="18" />
+
+    <TextView
+        android:id="@+id/tv_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:fontFamily="sans-serif-black"
+        android:text="Color"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
