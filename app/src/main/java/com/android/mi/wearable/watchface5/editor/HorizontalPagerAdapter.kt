@@ -54,7 +54,6 @@ class HorizontalPagerAdapter(
                     .inflate(R.layout.activity_watch_face_config_position, parent, false)
                 indicatorPosition = itemView.findViewById(R.id.indicatorViewPosition)
                 indicatorPosition?.setOnDotSelectedListener {
-                    Log.d("qwer", "it : $it")
                     FinalStatic.currentPositionPosition = it
                     listener.onPositionSelected(it, watchType)
                 }

@@ -13,8 +13,9 @@ import androidx.wear.watchface.style.UserStyleSchema
 import androidx.wear.watchface.style.UserStyleSetting
 import androidx.wear.watchface.style.WatchFaceLayer
 import com.android.mi.wearable.watchface5.R
+import com.android.mi.wearable.watchface5.data.watchface.FinalStatic
 import com.android.mi.wearable.watchface5.utils.*
-import com.android.mi.wearable.watchface5.utils.LEFT_COMPLICATION_ID
+import com.android.mi.wearable.watchface5.utils.TOP_COMPLICATION_ID
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
@@ -86,7 +87,13 @@ class WatchFaceConfigStateHolder(
     }
 
 
-    fun createWatchFacePreview(showHighlightLayer: Boolean, topOrBottom: Int): Bitmap {
+    fun createWatchFacePreview(showHighlightLayer: Boolean): Bitmap {
+        var topOrBottom = 0
+        if (FinalStatic.currentStylePosition == 0 && FinalStatic.currentPositionPosition == 0){
+            topOrBottom = BOTTOM_COMPLICATION_ID
+        }else if (FinalStatic.currentStylePosition == 0 && FinalStatic.currentPositionPosition == 1){
+            topOrBottom = TOP_COMPLICATION_ID
+        }
 
         val highlightLayer1 = if (showHighlightLayer) RenderParameters.HighlightLayer(
             RenderParameters.HighlightedElement.ComplicationSlot(topOrBottom),
@@ -94,11 +101,11 @@ class WatchFaceConfigStateHolder(
             Color.argb(128, 0, 0, 0) // Darken everything else.
         ) else null
 
-        val highlightLayer = if (showHighlightLayer) RenderParameters.HighlightLayer(
-            RenderParameters.HighlightedElement.AllComplicationSlots,
-            activity.getColor(R.color.complication_border), // Red complication highlight.
-            Color.argb(128, 0, 0, 0) // Darken everything else.
-        ) else null
+//        val highlightLayer = if (showHighlightLayer) RenderParameters.HighlightLayer(
+//            RenderParameters.HighlightedElement.AllComplicationSlots,
+//            activity.getColor(R.color.complication_border), // Red complication highlight.
+//            Color.argb(128, 0, 0, 0) // Darken everything else.
+//        ) else null
         return editorSession.renderWatchFaceToBitmap(
             RenderParameters(
                 DrawMode.INTERACTIVE,
@@ -144,11 +151,11 @@ class WatchFaceConfigStateHolder(
 
     fun setComplication(complicationLocation: Int) {
         val complicationSlotId = when (complicationLocation) {
-            LEFT_COMPLICATION_ID -> {
-                LEFT_COMPLICATION_ID
+            TOP_COMPLICATION_ID -> {
+                TOP_COMPLICATION_ID
             }
-            RIGHT_COMPLICATION_ID -> {
-                RIGHT_COMPLICATION_ID
+            BOTTOM_COMPLICATION_ID -> {
+                BOTTOM_COMPLICATION_ID
             }
             else -> {
                 return

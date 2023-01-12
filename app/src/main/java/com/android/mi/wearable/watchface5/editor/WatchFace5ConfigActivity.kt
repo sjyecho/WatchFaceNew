@@ -9,8 +9,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.android.mi.wearable.watchface5.data.watchface.*
 import com.android.mi.wearable.watchface5.databinding.ActivityWatchFaceConfig5Binding
 import com.android.mi.wearable.watchface5.utils.BitmapTranslateUtils
-import com.android.mi.wearable.watchface5.utils.LEFT_COMPLICATION_ID
-import com.android.mi.wearable.watchface5.utils.RIGHT_COMPLICATION_ID
+import com.android.mi.wearable.watchface5.utils.TOP_COMPLICATION_ID
+import com.android.mi.wearable.watchface5.utils.BOTTOM_COMPLICATION_ID
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -132,13 +132,13 @@ class WatchFace5ConfigActivity : ComponentActivity(), IComplicationClick {
 
     override fun onTopClick() {
         if (stateHolder.pageType == 3) {
-            stateHolder.setComplication(LEFT_COMPLICATION_ID)
+            stateHolder.setComplication(TOP_COMPLICATION_ID)
         }
     }
 
     override fun onBottomClick() {
         if (stateHolder.pageType == 3) {
-            stateHolder.setComplication(RIGHT_COMPLICATION_ID)
+            stateHolder.setComplication(BOTTOM_COMPLICATION_ID)
         }
     }
 
@@ -199,13 +199,12 @@ class WatchFace5ConfigActivity : ComponentActivity(), IComplicationClick {
                     if (isShowHighLayer) View.GONE else View.VISIBLE
 //                binding.preview.leftHighlight.visibility= if (isShowHighLayer) View.VISIBLE else View.GONE
 //                binding.preview.rightHighlight.visibility= if (isShowHighLayer) View.VISIBLE else View.GONE
-                //TODO
                 if (FinalStatic.currentStylePosition == 0 && FinalStatic.currentPositionPosition == 0) {
                     Log.d("qwer", "0 0 ")
                     binding.preview.watchFaceBackground.setImageBitmap(
                         stateHolder.createWatchFacePreview(
                             isShowHighLayer,
-                            RIGHT_COMPLICATION_ID
+                            /*BOTTOM_COMPLICATION_ID // 101*/
                         )
                     )
                 } else if (FinalStatic.currentStylePosition == 0 && FinalStatic.currentPositionPosition == 1)
@@ -213,7 +212,7 @@ class WatchFace5ConfigActivity : ComponentActivity(), IComplicationClick {
                     binding.preview.watchFaceBackground.setImageBitmap(
                         stateHolder.createWatchFacePreview(
                             isShowHighLayer,
-                            LEFT_COMPLICATION_ID
+                            /*TOP_COMPLICATION_ID // 100*/
                         )
                     )
             }

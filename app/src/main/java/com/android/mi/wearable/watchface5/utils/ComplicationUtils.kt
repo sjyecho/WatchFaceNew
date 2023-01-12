@@ -17,7 +17,6 @@ package com.android.mi.wearable.watchface5.utils
 
 import android.content.Context
 import android.graphics.RectF
-import android.util.Log
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.ComplicationSlot
 import androidx.wear.watchface.ComplicationSlotsManager
@@ -29,7 +28,6 @@ import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawabl
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import com.android.mi.wearable.watchface5.R
-import com.android.mi.wearable.watchface5.data.watchface.FinalStatic
 
 // Information needed for complications.
 // Creates bounds for the locations of both right and left complications. (This is the
@@ -50,15 +48,15 @@ private const val DEFAULT_COMPLICATION_STYLE_DRAWABLE_ID_LEFT = R.drawable.compl
 
 // Unique IDs for each complication. The settings activity that supports allowing users
 // to select their complication data provider requires numbers to be >= 0.
-internal const val LEFT_COMPLICATION_ID = 100
-internal const val RIGHT_COMPLICATION_ID = 101
+internal const val TOP_COMPLICATION_ID = 100
+internal const val BOTTOM_COMPLICATION_ID = 101
 
 /**
  * Represents the unique id associated with a complication and the complication types it supports.
  */
 sealed class ComplicationConfig(val id: Int, val supportedTypes: List<ComplicationType>) {
     object Left : ComplicationConfig(
-        LEFT_COMPLICATION_ID,
+        TOP_COMPLICATION_ID,
         listOf(
             ComplicationType.PHOTO_IMAGE,
 //            ComplicationType.RANGED_VALUE,
@@ -69,7 +67,7 @@ sealed class ComplicationConfig(val id: Int, val supportedTypes: List<Complicati
     )
 
     object Right : ComplicationConfig(
-        RIGHT_COMPLICATION_ID,
+        BOTTOM_COMPLICATION_ID,
         listOf(
             ComplicationType.PHOTO_IMAGE,
             ComplicationType.RANGED_VALUE,
