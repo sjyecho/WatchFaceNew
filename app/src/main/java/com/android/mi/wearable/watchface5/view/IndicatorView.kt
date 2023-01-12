@@ -87,6 +87,7 @@ class IndicatorView @JvmOverloads constructor(
                 getInt(R.styleable.IndicatorView_iv_anchor_color_level_12, Color.GRAY),
                 getInt(R.styleable.IndicatorView_iv_anchor_color_level_13, Color.GRAY),
                 getInt(R.styleable.IndicatorView_iv_anchor_color_level_14, Color.GRAY),
+                getInt(R.styleable.IndicatorView_iv_anchor_color_level_15, Color.GRAY),
                 getInt(R.styleable.IndicatorView_iv_anchor_color_level_16, Color.GRAY),
                 getInt(R.styleable.IndicatorView_iv_anchor_color_level_17, Color.GRAY),
                 getInt(R.styleable.IndicatorView_iv_anchor_color_level_18, Color.GRAY),
@@ -228,7 +229,7 @@ class IndicatorView @JvmOverloads constructor(
      * 绘制dot
      */
     private fun Canvas.drawDot(dotItem: DotItem) {
-        withTranslation(measuredWidth / 2f, measuredHeight / 2f) {
+        withTranslation(measuredWidth / 2f, 19f) {
             withRotation(dotItem.angle - mScrollAngle) {
                 refreshDot(dotItem)
                 drawCircle(mScrollRadius, 0f, dotItem.size, mDotPaint.apply { color = dotItem.color })
@@ -240,7 +241,7 @@ class IndicatorView @JvmOverloads constructor(
      * 绘制圆环
      */
     private fun Canvas.drawRing() {
-        withTranslation(measuredWidth / 2f, measuredHeight / 2f) {
+        withTranslation(measuredWidth / 2f, 19f) {
             withRotation(mRingAngle) {
                 drawCircle(mScrollRadius, 0f, mRingRadius, mRingPaint)
             }

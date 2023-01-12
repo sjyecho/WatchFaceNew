@@ -7,8 +7,8 @@
 
     <com.android.mi.wearable.watchface5.view.IndicatorView
         android:id="@+id/indicatorView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="400px"
+        android:layout_height="87px"
         android:background="@android:color/transparent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,6 +18,7 @@
         app:iv_anchor_color_level_1="@color/color1"
         app:iv_anchor_color_level_2="@color/color2"
         app:iv_anchor_color_level_3="@color/color3"
+        app:iv_anchor_color_level_4="@color/color4"
         app:iv_anchor_color_level_5="@color/color5"
         app:iv_anchor_color_level_6="@color/color6"
         app:iv_anchor_color_level_7="@color/color7"
@@ -55,9 +56,22 @@
         app:iv_anchor_size_level_2="11"
         app:iv_dot_interval_angle="12"
         app:iv_ring_stroke="2px"
-        app:iv_dot_count="36"
+        app:iv_dot_count="37"
         app:iv_ring_angle="0"
         app:iv_ring_radius="18" />
+    
+    
+    <ImageView
+        android:id="@+id/circle_bottom"
+        android:layout_width="100px"
+        android:layout_height="450px"
+        android:src="@drawable/bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.63"/>
 
     <TextView
         android:id="@+id/tv_text"
