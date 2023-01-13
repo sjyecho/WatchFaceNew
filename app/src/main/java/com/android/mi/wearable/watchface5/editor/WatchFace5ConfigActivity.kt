@@ -9,8 +9,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.android.mi.wearable.watchface5.data.watchface.*
 import com.android.mi.wearable.watchface5.databinding.ActivityWatchFaceConfig5Binding
 import com.android.mi.wearable.watchface5.utils.BitmapTranslateUtils
-import com.android.mi.wearable.watchface5.utils.TOP_COMPLICATION_ID
-import com.android.mi.wearable.watchface5.utils.BOTTOM_COMPLICATION_ID
+import com.android.mi.wearable.watchface5.utils.TOP_COMPLICATION_ID_1
+import com.android.mi.wearable.watchface5.utils.BOTTOM_COMPLICATION_ID_1
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -132,13 +132,13 @@ class WatchFace5ConfigActivity : ComponentActivity(), IComplicationClick {
 
     override fun onTopClick() {
         if (stateHolder.pageType == 3) {
-            stateHolder.setComplication(TOP_COMPLICATION_ID)
+            stateHolder.setComplication(TOP_COMPLICATION_ID_1)
         }
     }
 
     override fun onBottomClick() {
         if (stateHolder.pageType == 3) {
-            stateHolder.setComplication(BOTTOM_COMPLICATION_ID)
+            stateHolder.setComplication(BOTTOM_COMPLICATION_ID_1)
         }
     }
 

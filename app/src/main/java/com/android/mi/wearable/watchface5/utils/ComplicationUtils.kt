@@ -33,14 +33,6 @@ import com.android.mi.wearable.watchface5.R
 // Creates bounds for the locations of both right and left complications. (This is the
 // location from 0.0 - 1.0.)
 // Both left and right complications use the same top and bottom bounds.
-private const val LEFT_AND_RIGHT_COMPLICATIONS_TOP_BOUND = 0.4f
-private const val LEFT_AND_RIGHT_COMPLICATIONS_BOTTOM_BOUND = 0.7f
-
-private const val LEFT_COMPLICATION_LEFT_BOUND = 0.2f
-private const val LEFT_COMPLICATION_RIGHT_BOUND = 0.5f
-
-private const val RIGHT_COMPLICATION_LEFT_BOUND = 0.6f
-private const val RIGHT_COMPLICATION_RIGHT_BOUND = 0.8f
 
 private const val DEFAULT_COMPLICATION_STYLE_DRAWABLE_ID = R.drawable.complication_right_style1
 
@@ -48,15 +40,34 @@ private const val DEFAULT_COMPLICATION_STYLE_DRAWABLE_ID_LEFT = R.drawable.compl
 
 // Unique IDs for each complication. The settings activity that supports allowing users
 // to select their complication data provider requires numbers to be >= 0.
-internal const val TOP_COMPLICATION_ID = 100
-internal const val BOTTOM_COMPLICATION_ID = 101
+
+//style1的两个
+internal const val TOP_COMPLICATION_ID_1 = 100
+internal const val BOTTOM_COMPLICATION_ID_1 = 101
+
+//style2的四个
+internal const val TOP_COMPLICATION_ID_2 = 102
+internal const val BOTTOM_COMPLICATION_ID_2 = 103
+internal const val LEFT_COMPLICATION_ID_2= 104
+internal const val RIGHT_COMPLICATION_ID_2 = 105
+
+//style5的两个
+internal const val LEFT_COMPLICATION_ID_5 = 106
+internal const val RIGHT_COMPLICATION_ID_5 = 107
+
+//Style6的三个
+internal const val TOP_COMPLICATION_ID_6 = 108
+internal const val BOTTOM_COMPLICATION_ID_6= 109
+internal const val RIGHT_COMPLICATION_ID_6= 110
+
 
 /**
  * Represents the unique id associated with a complication and the complication types it supports.
  */
 sealed class ComplicationConfig(val id: Int, val supportedTypes: List<ComplicationType>) {
-    object Left : ComplicationConfig(
-        TOP_COMPLICATION_ID,
+    //STYLE1
+    object Top1 : ComplicationConfig(
+        TOP_COMPLICATION_ID_1,
         listOf(
             ComplicationType.PHOTO_IMAGE,
 //            ComplicationType.RANGED_VALUE,
@@ -66,14 +77,114 @@ sealed class ComplicationConfig(val id: Int, val supportedTypes: List<Complicati
         )
     )
 
-    object Right : ComplicationConfig(
-        BOTTOM_COMPLICATION_ID,
+    object Bottom1 : ComplicationConfig(
+        BOTTOM_COMPLICATION_ID_1,
         listOf(
             ComplicationType.PHOTO_IMAGE,
-            ComplicationType.RANGED_VALUE,
+//            ComplicationType.RANGED_VALUE,
 //            ComplicationType.MONOCHROMATIC_IMAGE,
 //            ComplicationType.SHORT_TEXT,
 //            ComplicationType.SMALL_IMAGE
+        )
+    )
+
+
+    //STYLE2
+    object Top2 : ComplicationConfig(
+        TOP_COMPLICATION_ID_2,
+        listOf(
+            ComplicationType.PHOTO_IMAGE,
+//            ComplicationType.RANGED_VALUE,
+//            ComplicationType.MONOCHROMATIC_IMAGE,
+//            ComplicationType.SHORT_TEXT,
+//            ComplicationType.SMALL_IMAGE,
+        )
+    )
+
+    object Bottom2 : ComplicationConfig(
+        BOTTOM_COMPLICATION_ID_2,
+        listOf(
+            ComplicationType.PHOTO_IMAGE,
+//            ComplicationType.RANGED_VALUE,
+//            ComplicationType.MONOCHROMATIC_IMAGE,
+//            ComplicationType.SHORT_TEXT,
+//            ComplicationType.SMALL_IMAGE
+        )
+    )
+    object Left2 : ComplicationConfig(
+        LEFT_COMPLICATION_ID_2,
+        listOf(
+            ComplicationType.PHOTO_IMAGE,
+//            ComplicationType.RANGED_VALUE,
+//            ComplicationType.MONOCHROMATIC_IMAGE,
+//            ComplicationType.SHORT_TEXT,
+//            ComplicationType.SMALL_IMAGE,
+        )
+    )
+
+    object Right2 : ComplicationConfig(
+        RIGHT_COMPLICATION_ID_2,
+        listOf(
+            ComplicationType.PHOTO_IMAGE,
+//            ComplicationType.RANGED_VALUE,
+//            ComplicationType.MONOCHROMATIC_IMAGE,
+//            ComplicationType.SHORT_TEXT,
+//            ComplicationType.SMALL_IMAGE
+        )
+    )
+
+    //style5
+    object Left5 : ComplicationConfig(
+        LEFT_COMPLICATION_ID_5,
+        listOf(
+            ComplicationType.PHOTO_IMAGE,
+//            ComplicationType.RANGED_VALUE,
+//            ComplicationType.MONOCHROMATIC_IMAGE,
+//            ComplicationType.SHORT_TEXT,
+//            ComplicationType.SMALL_IMAGE,
+        )
+    )
+    object Right5 : ComplicationConfig(
+        RIGHT_COMPLICATION_ID_5,
+        listOf(
+            ComplicationType.PHOTO_IMAGE,
+//            ComplicationType.RANGED_VALUE,
+//            ComplicationType.MONOCHROMATIC_IMAGE,
+//            ComplicationType.SHORT_TEXT,
+//            ComplicationType.SMALL_IMAGE
+        )
+    )
+
+    //style6
+    object Top6 : ComplicationConfig(
+        TOP_COMPLICATION_ID_6,
+        listOf(
+            ComplicationType.PHOTO_IMAGE,
+//            ComplicationType.RANGED_VALUE,
+//            ComplicationType.MONOCHROMATIC_IMAGE,
+//            ComplicationType.SHORT_TEXT,
+//            ComplicationType.SMALL_IMAGE,
+        )
+    )
+
+    object Bottom6 : ComplicationConfig(
+        BOTTOM_COMPLICATION_ID_6,
+        listOf(
+            ComplicationType.PHOTO_IMAGE,
+//            ComplicationType.RANGED_VALUE,
+//            ComplicationType.MONOCHROMATIC_IMAGE,
+//            ComplicationType.SHORT_TEXT,
+//            ComplicationType.SMALL_IMAGE
+        )
+    )
+    object Right6 : ComplicationConfig(
+        RIGHT_COMPLICATION_ID_6,
+        listOf(
+            ComplicationType.PHOTO_IMAGE,
+//            ComplicationType.RANGED_VALUE,
+//            ComplicationType.MONOCHROMATIC_IMAGE,
+//            ComplicationType.SHORT_TEXT,
+//            ComplicationType.SMALL_IMAGE,
         )
     )
 }
@@ -103,10 +214,10 @@ fun createComplicationSlotManager(
             )
         }
 
-    val topComplication = ComplicationSlot.createRoundRectComplicationSlotBuilder(
-        id = ComplicationConfig.Left.id,
+    val topComplication1 = ComplicationSlot.createRoundRectComplicationSlotBuilder(
+        id = ComplicationConfig.Top1.id,
         canvasComplicationFactory = defaultLeftCanvasComplicationFactory,
-        supportedTypes = ComplicationConfig.Left.supportedTypes,
+        supportedTypes = ComplicationConfig.Top1.supportedTypes,
         defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
             SystemDataSources.DATA_SOURCE_APP_SHORTCUT,
             ComplicationType.SHORT_TEXT
@@ -121,10 +232,10 @@ fun createComplicationSlotManager(
         )
     ).build()
 
-    val bottomComplication = ComplicationSlot.createRoundRectComplicationSlotBuilder(
-        id = ComplicationConfig.Right.id,
+    val bottomComplication1 = ComplicationSlot.createRoundRectComplicationSlotBuilder(
+        id = ComplicationConfig.Bottom1.id,
         canvasComplicationFactory = defaultRightCanvasComplicationFactory,
-        supportedTypes = ComplicationConfig.Right.supportedTypes,
+        supportedTypes = ComplicationConfig.Bottom1.supportedTypes,
         defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
             SystemDataSources.DATA_SOURCE_WATCH_BATTERY,
             ComplicationType.RANGED_VALUE
@@ -139,8 +250,84 @@ fun createComplicationSlotManager(
         )
     ).build()
 
+
+    //Style2
+    val topComplication2 = ComplicationSlot.createRoundRectComplicationSlotBuilder(
+        id = ComplicationConfig.Top2.id,
+        canvasComplicationFactory = defaultLeftCanvasComplicationFactory,
+        supportedTypes = ComplicationConfig.Top2.supportedTypes,
+        defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
+            SystemDataSources.DATA_SOURCE_APP_SHORTCUT,
+            ComplicationType.SHORT_TEXT
+        ),
+        bounds = ComplicationSlotBounds(
+            RectF(
+                0.4f,
+                0.35f,
+                0.62f,
+                0.4f
+            )
+        )
+    ).build()
+
+    val bottomComplication2 = ComplicationSlot.createRoundRectComplicationSlotBuilder(
+        id = ComplicationConfig.Bottom2.id,
+        canvasComplicationFactory = defaultRightCanvasComplicationFactory,
+        supportedTypes = ComplicationConfig.Bottom2.supportedTypes,
+        defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
+            SystemDataSources.DATA_SOURCE_WATCH_BATTERY,
+            ComplicationType.RANGED_VALUE
+        ),
+        bounds = ComplicationSlotBounds(
+            RectF(
+                0.4f,
+                0.67f,
+                0.62f,
+                0.72f
+            )
+        )
+    ).build()
+
+    val leftComplication2 = ComplicationSlot.createRoundRectComplicationSlotBuilder(
+        id = ComplicationConfig.Left2.id,
+        canvasComplicationFactory = defaultLeftCanvasComplicationFactory,
+        supportedTypes = ComplicationConfig.Left2.supportedTypes,
+        defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
+            SystemDataSources.DATA_SOURCE_APP_SHORTCUT,
+            ComplicationType.SHORT_TEXT
+        ),
+        bounds = ComplicationSlotBounds(
+            RectF(
+                0.4f,
+                0.35f,
+                0.62f,
+                0.4f
+            )
+        )
+    ).build()
+
+    val rightComplication2 = ComplicationSlot.createRoundRectComplicationSlotBuilder(
+        id = ComplicationConfig.Right2.id,
+        canvasComplicationFactory = defaultRightCanvasComplicationFactory,
+        supportedTypes = ComplicationConfig.Right2.supportedTypes,
+        defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
+            SystemDataSources.DATA_SOURCE_WATCH_BATTERY,
+            ComplicationType.RANGED_VALUE
+        ),
+        bounds = ComplicationSlotBounds(
+            RectF(
+                0.4f,
+                0.67f,
+                0.62f,
+                0.72f
+            )
+        )
+    ).build()
+
+
+
     return ComplicationSlotsManager(
-        listOf(topComplication, bottomComplication),
+        listOf(topComplication1, bottomComplication1,topComplication2,bottomComplication2,leftComplication2,rightComplication2),
         currentUserStyleRepository
     )
 }

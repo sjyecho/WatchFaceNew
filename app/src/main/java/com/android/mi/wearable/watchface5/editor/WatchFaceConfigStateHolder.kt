@@ -15,7 +15,7 @@ import androidx.wear.watchface.style.WatchFaceLayer
 import com.android.mi.wearable.watchface5.R
 import com.android.mi.wearable.watchface5.data.watchface.FinalStatic
 import com.android.mi.wearable.watchface5.utils.*
-import com.android.mi.wearable.watchface5.utils.TOP_COMPLICATION_ID
+import com.android.mi.wearable.watchface5.utils.TOP_COMPLICATION_ID_1
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
@@ -90,9 +90,17 @@ class WatchFaceConfigStateHolder(
     fun createWatchFacePreview(showHighlightLayer: Boolean): Bitmap {
         var topOrBottom = 0
         if (FinalStatic.currentStylePosition == 0 && FinalStatic.currentPositionPosition == 0){
-            topOrBottom = BOTTOM_COMPLICATION_ID
+            topOrBottom = BOTTOM_COMPLICATION_ID_1
         }else if (FinalStatic.currentStylePosition == 0 && FinalStatic.currentPositionPosition == 1){
-            topOrBottom = TOP_COMPLICATION_ID
+            topOrBottom = TOP_COMPLICATION_ID_1
+        }else if (FinalStatic.currentStylePosition == 1 && FinalStatic.currentPositionPosition == 0){
+            topOrBottom = TOP_COMPLICATION_ID_2
+        }else if (FinalStatic.currentStylePosition == 1 && FinalStatic.currentPositionPosition == 1){
+            topOrBottom = BOTTOM_COMPLICATION_ID_2
+        }else if (FinalStatic.currentStylePosition == 1 && FinalStatic.currentPositionPosition == 2){
+            topOrBottom = LEFT_COMPLICATION_ID_2
+        }else if (FinalStatic.currentStylePosition == 1 && FinalStatic.currentPositionPosition == 3){
+            topOrBottom = RIGHT_COMPLICATION_ID_2
         }
 
         val highlightLayer1 = if (showHighlightLayer) RenderParameters.HighlightLayer(
@@ -151,11 +159,23 @@ class WatchFaceConfigStateHolder(
 
     fun setComplication(complicationLocation: Int) {
         val complicationSlotId = when (complicationLocation) {
-            TOP_COMPLICATION_ID -> {
-                TOP_COMPLICATION_ID
+            TOP_COMPLICATION_ID_1 -> {
+                TOP_COMPLICATION_ID_1
             }
-            BOTTOM_COMPLICATION_ID -> {
-                BOTTOM_COMPLICATION_ID
+            BOTTOM_COMPLICATION_ID_1 -> {
+                BOTTOM_COMPLICATION_ID_1
+            }
+            TOP_COMPLICATION_ID_2 -> {
+                TOP_COMPLICATION_ID_2
+            }
+            BOTTOM_COMPLICATION_ID_2 -> {
+                BOTTOM_COMPLICATION_ID_2
+            }
+            LEFT_COMPLICATION_ID_2 -> {
+                LEFT_COMPLICATION_ID_2
+            }
+            RIGHT_COMPLICATION_ID_2 -> {
+                RIGHT_COMPLICATION_ID_2
             }
             else -> {
                 return
