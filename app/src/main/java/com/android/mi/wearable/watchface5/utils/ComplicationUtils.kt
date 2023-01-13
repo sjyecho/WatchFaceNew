@@ -36,7 +36,7 @@ import com.android.mi.wearable.watchface5.R
 
 private const val DEFAULT_COMPLICATION_STYLE_DRAWABLE_ID = R.drawable.complication_right_style1
 
-private const val DEFAULT_COMPLICATION_STYLE_DRAWABLE_ID_LEFT = R.drawable.complication_left_style1
+//private const val DEFAULT_COMPLICATION_STYLE_DRAWABLE_ID_LEFT = R.drawable.complication_left_style1
 
 // Unique IDs for each complication. The settings activity that supports allowing users
 // to select their complication data provider requires numbers to be >= 0.
@@ -69,22 +69,18 @@ sealed class ComplicationConfig(val id: Int, val supportedTypes: List<Complicati
     object Top1 : ComplicationConfig(
         TOP_COMPLICATION_ID_1,
         listOf(
-            ComplicationType.PHOTO_IMAGE,
-//            ComplicationType.RANGED_VALUE,
-//            ComplicationType.MONOCHROMATIC_IMAGE,
-//            ComplicationType.SHORT_TEXT,
-//            ComplicationType.SMALL_IMAGE,
+
+            ComplicationType.SHORT_TEXT,
+
         )
     )
 
     object Bottom1 : ComplicationConfig(
         BOTTOM_COMPLICATION_ID_1,
         listOf(
-            ComplicationType.PHOTO_IMAGE,
-//            ComplicationType.RANGED_VALUE,
-//            ComplicationType.MONOCHROMATIC_IMAGE,
-//            ComplicationType.SHORT_TEXT,
-//            ComplicationType.SMALL_IMAGE
+
+            ComplicationType.SHORT_TEXT,
+
         )
     )
 
@@ -93,43 +89,36 @@ sealed class ComplicationConfig(val id: Int, val supportedTypes: List<Complicati
     object Top2 : ComplicationConfig(
         TOP_COMPLICATION_ID_2,
         listOf(
-            ComplicationType.PHOTO_IMAGE,
-//            ComplicationType.RANGED_VALUE,
-//            ComplicationType.MONOCHROMATIC_IMAGE,
-//            ComplicationType.SHORT_TEXT,
-//            ComplicationType.SMALL_IMAGE,
+
+            ComplicationType.SHORT_TEXT,
+
         )
     )
 
     object Bottom2 : ComplicationConfig(
         BOTTOM_COMPLICATION_ID_2,
         listOf(
-            ComplicationType.PHOTO_IMAGE,
-//            ComplicationType.RANGED_VALUE,
-//            ComplicationType.MONOCHROMATIC_IMAGE,
-//            ComplicationType.SHORT_TEXT,
-//            ComplicationType.SMALL_IMAGE
+
+            ComplicationType.SHORT_TEXT,
+
         )
     )
     object Left2 : ComplicationConfig(
         LEFT_COMPLICATION_ID_2,
         listOf(
-            ComplicationType.PHOTO_IMAGE,
-//            ComplicationType.RANGED_VALUE,
-//            ComplicationType.MONOCHROMATIC_IMAGE,
-//            ComplicationType.SHORT_TEXT,
-//            ComplicationType.SMALL_IMAGE,
+
+
+           ComplicationType.SHORT_TEXT,
+
         )
     )
 
     object Right2 : ComplicationConfig(
         RIGHT_COMPLICATION_ID_2,
         listOf(
-            ComplicationType.PHOTO_IMAGE,
-//            ComplicationType.RANGED_VALUE,
-//            ComplicationType.MONOCHROMATIC_IMAGE,
-//            ComplicationType.SHORT_TEXT,
-//            ComplicationType.SMALL_IMAGE
+
+            ComplicationType.SHORT_TEXT,
+
         )
     )
 
@@ -137,21 +126,18 @@ sealed class ComplicationConfig(val id: Int, val supportedTypes: List<Complicati
     object Left5 : ComplicationConfig(
         LEFT_COMPLICATION_ID_5,
         listOf(
-            ComplicationType.PHOTO_IMAGE,
-//            ComplicationType.RANGED_VALUE,
-//            ComplicationType.MONOCHROMATIC_IMAGE,
-//            ComplicationType.SHORT_TEXT,
-//            ComplicationType.SMALL_IMAGE,
+
+            ComplicationType.SHORT_TEXT,
+
         )
     )
     object Right5 : ComplicationConfig(
         RIGHT_COMPLICATION_ID_5,
         listOf(
             ComplicationType.PHOTO_IMAGE,
-//            ComplicationType.RANGED_VALUE,
-//            ComplicationType.MONOCHROMATIC_IMAGE,
-//            ComplicationType.SHORT_TEXT,
-//            ComplicationType.SMALL_IMAGE
+
+            ComplicationType.SHORT_TEXT,
+
         )
     )
 
@@ -159,32 +145,25 @@ sealed class ComplicationConfig(val id: Int, val supportedTypes: List<Complicati
     object Top6 : ComplicationConfig(
         TOP_COMPLICATION_ID_6,
         listOf(
-            ComplicationType.PHOTO_IMAGE,
-//            ComplicationType.RANGED_VALUE,
-//            ComplicationType.MONOCHROMATIC_IMAGE,
-//            ComplicationType.SHORT_TEXT,
-//            ComplicationType.SMALL_IMAGE,
+
+           ComplicationType.SHORT_TEXT,
         )
     )
 
     object Bottom6 : ComplicationConfig(
         BOTTOM_COMPLICATION_ID_6,
         listOf(
-            ComplicationType.PHOTO_IMAGE,
-//            ComplicationType.RANGED_VALUE,
-//            ComplicationType.MONOCHROMATIC_IMAGE,
-//            ComplicationType.SHORT_TEXT,
-//            ComplicationType.SMALL_IMAGE
+
+           ComplicationType.SHORT_TEXT,
+
         )
     )
     object Right6 : ComplicationConfig(
         RIGHT_COMPLICATION_ID_6,
         listOf(
-            ComplicationType.PHOTO_IMAGE,
-//            ComplicationType.RANGED_VALUE,
-//            ComplicationType.MONOCHROMATIC_IMAGE,
-//            ComplicationType.SHORT_TEXT,
-//            ComplicationType.SMALL_IMAGE,
+
+            ComplicationType.SHORT_TEXT,
+
         )
     )
 }
@@ -193,7 +172,6 @@ sealed class ComplicationConfig(val id: Int, val supportedTypes: List<Complicati
 fun createComplicationSlotManager(
     context: Context,
     currentUserStyleRepository: CurrentUserStyleRepository,
-    drawableLeftId: Int = DEFAULT_COMPLICATION_STYLE_DRAWABLE_ID_LEFT,
     drawableRightId: Int = DEFAULT_COMPLICATION_STYLE_DRAWABLE_ID
 ): ComplicationSlotsManager {
     val defaultRightCanvasComplicationFactory =
@@ -208,7 +186,7 @@ fun createComplicationSlotManager(
     val defaultLeftCanvasComplicationFactory =
         CanvasComplicationFactory { watchState, listener ->
             CanvasComplicationDrawable(
-                ComplicationDrawable.getDrawable(context, drawableLeftId)!!,
+                ComplicationDrawable.getDrawable(context, drawableRightId)!!,
                 watchState,
                 listener
             )
@@ -219,14 +197,14 @@ fun createComplicationSlotManager(
         canvasComplicationFactory = defaultLeftCanvasComplicationFactory,
         supportedTypes = ComplicationConfig.Top1.supportedTypes,
         defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
-            SystemDataSources.DATA_SOURCE_APP_SHORTCUT,
+            SystemDataSources.DATA_SOURCE_WATCH_BATTERY,
             ComplicationType.SHORT_TEXT
         ),
         bounds = ComplicationSlotBounds(
             RectF(
-                0.4f,
+                0.3f,
                 0.05f,
-                0.62f,
+                0.72f,
                 0.11f
             )
         )
@@ -238,13 +216,13 @@ fun createComplicationSlotManager(
         supportedTypes = ComplicationConfig.Bottom1.supportedTypes,
         defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
             SystemDataSources.DATA_SOURCE_WATCH_BATTERY,
-            ComplicationType.RANGED_VALUE
+            ComplicationType.SHORT_TEXT
         ),
         bounds = ComplicationSlotBounds(
             RectF(
-                0.4f,
+                0.3f,
                 0.85f,
-                0.62f,
+                0.72f,
                 0.91f
             )
         )
@@ -257,7 +235,7 @@ fun createComplicationSlotManager(
         canvasComplicationFactory = defaultLeftCanvasComplicationFactory,
         supportedTypes = ComplicationConfig.Top2.supportedTypes,
         defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
-            SystemDataSources.DATA_SOURCE_APP_SHORTCUT,
+            SystemDataSources.DATA_SOURCE_WATCH_BATTERY,
             ComplicationType.SHORT_TEXT
         ),
         bounds = ComplicationSlotBounds(
@@ -276,7 +254,7 @@ fun createComplicationSlotManager(
         supportedTypes = ComplicationConfig.Bottom2.supportedTypes,
         defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
             SystemDataSources.DATA_SOURCE_WATCH_BATTERY,
-            ComplicationType.RANGED_VALUE
+            ComplicationType.SHORT_TEXT
         ),
         bounds = ComplicationSlotBounds(
             RectF(
@@ -293,7 +271,7 @@ fun createComplicationSlotManager(
         canvasComplicationFactory = defaultLeftCanvasComplicationFactory,
         supportedTypes = ComplicationConfig.Left2.supportedTypes,
         defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
-            SystemDataSources.DATA_SOURCE_APP_SHORTCUT,
+            SystemDataSources.DATA_SOURCE_WATCH_BATTERY,
             ComplicationType.SHORT_TEXT
         ),
         bounds = ComplicationSlotBounds(
@@ -312,7 +290,7 @@ fun createComplicationSlotManager(
         supportedTypes = ComplicationConfig.Right2.supportedTypes,
         defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
             SystemDataSources.DATA_SOURCE_WATCH_BATTERY,
-            ComplicationType.RANGED_VALUE
+            ComplicationType.SHORT_TEXT
         ),
         bounds = ComplicationSlotBounds(
             RectF(
@@ -330,14 +308,14 @@ fun createComplicationSlotManager(
         canvasComplicationFactory = defaultLeftCanvasComplicationFactory,
         supportedTypes = ComplicationConfig.Left5.supportedTypes,
         defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
-            SystemDataSources.DATA_SOURCE_APP_SHORTCUT,
+            SystemDataSources.DATA_SOURCE_WATCH_BATTERY,
             ComplicationType.SHORT_TEXT
         ),
         bounds = ComplicationSlotBounds(
             RectF(
                 0.1f,
-                0.53f,
-                0.45f,
+                0.50f,
+                0.55f,
                 0.58f
             )
         )
@@ -349,13 +327,13 @@ fun createComplicationSlotManager(
         supportedTypes = ComplicationConfig.Right5.supportedTypes,
         defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
             SystemDataSources.DATA_SOURCE_WATCH_BATTERY,
-            ComplicationType.RANGED_VALUE
+            ComplicationType.SHORT_TEXT
         ),
         bounds = ComplicationSlotBounds(
             RectF(
                 0.55f,
-                0.53f,
-                0.90f,
+                0.51f,
+                0.92f,
                 0.58f
             )
         )
@@ -368,7 +346,7 @@ fun createComplicationSlotManager(
         canvasComplicationFactory = defaultLeftCanvasComplicationFactory,
         supportedTypes = ComplicationConfig.Top6.supportedTypes,
         defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
-            SystemDataSources.DATA_SOURCE_APP_SHORTCUT,
+            SystemDataSources.DATA_SOURCE_WATCH_BATTERY,
             ComplicationType.SHORT_TEXT
         ),
         bounds = ComplicationSlotBounds(
@@ -387,14 +365,14 @@ fun createComplicationSlotManager(
         supportedTypes = ComplicationConfig.Bottom6.supportedTypes,
         defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
             SystemDataSources.DATA_SOURCE_WATCH_BATTERY,
-            ComplicationType.RANGED_VALUE
+            ComplicationType.SHORT_TEXT
         ),
         bounds = ComplicationSlotBounds(
             RectF(
                 0.3f,
-                0.3f,
+                0.25f,
                 0.72f,
-                0.35f
+                0.30f
             )
         )
     ).build()
@@ -405,7 +383,7 @@ fun createComplicationSlotManager(
         canvasComplicationFactory = defaultLeftCanvasComplicationFactory,
         supportedTypes = ComplicationConfig.Right6.supportedTypes,
         defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
-            SystemDataSources.DATA_SOURCE_APP_SHORTCUT,
+            SystemDataSources.DATA_SOURCE_WATCH_BATTERY,
             ComplicationType.SHORT_TEXT
         ),
         bounds = ComplicationSlotBounds(
@@ -413,7 +391,7 @@ fun createComplicationSlotManager(
                 0.58f,
                 0.58f,
                 0.95f,
-                0.67f
+                0.62f
             )
         )
     ).build()

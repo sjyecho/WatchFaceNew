@@ -10,14 +10,14 @@ import android.util.Log
 import android.view.SurfaceHolder
 import androidx.core.graphics.withRotation
 import androidx.wear.watchface.*
+import androidx.wear.watchface.complications.data.RangedValueComplicationData
+import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import androidx.wear.watchface.style.UserStyle
 import androidx.wear.watchface.style.UserStyleSetting
 import com.android.mi.wearable.watchface5.data.watchface.*
-import com.android.mi.wearable.watchface5.utils.BitmapTranslateUtils
-import com.android.mi.wearable.watchface5.utils.COLOR_STYLE_SETTING
-import com.android.mi.wearable.watchface5.utils.POSITION_STYLE_SETTING
-import com.android.mi.wearable.watchface5.utils.SHAPE_STYLE_SETTING
+import com.android.mi.wearable.watchface5.utils.*
+import com.android.mi.wearable.watchface5.utils.TOP_COMPLICATION_ID_1
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -299,6 +299,45 @@ class WatchFace3CanvasRenderer(
 
 
 
+    private val complicationPaint1 = Paint().apply {
+        typeface = Typeface.createFromAsset(context.assets,"fonts/BalooChettan2-SemiBold.ttf")
+        isAntiAlias = true
+        textSize = 24f
+        color = Color.WHITE
+    }
+
+    private val complicationPaint2 = Paint().apply {
+        typeface = Typeface.createFromAsset(context.assets,"fonts/MiSans_Demibold.ttf")
+        color = Color.WHITE
+        isAntiAlias = true
+        textSize = 24f
+    }
+
+    private val complicationPaint3 = Paint().apply {
+        typeface = Typeface.createFromAsset(context.assets,"fonts/MiSans_Light.ttf")
+        color = Color.WHITE
+        isAntiAlias = true
+        textSize = 36f
+    }
+    private val complicationPaint4 = Paint().apply {
+        typeface = Typeface.createFromAsset(context.assets,"fonts/MiSans_Demibold.ttf")
+        color = Color.WHITE
+        isAntiAlias = true
+        textSize = 36f
+    }
+
+
+    private val complicationPaint5 = Paint().apply {
+        typeface = Typeface.createFromAsset(context.assets,"fonts/MiSans_Medium.ttf")
+        color = Color.WHITE
+        isAntiAlias = true
+        textSize = 24f
+    }
+
+
+
+
+
 
     private val scope: CoroutineScope =
         CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
@@ -393,6 +432,7 @@ class WatchFace3CanvasRenderer(
         if (!drawAmbient){
             val bg = BitmapFactory.decodeResource(context.resources,BitmapTranslateUtils.currentBg(watchFaceData.shapeStyle.shapeType))
             canvas.drawBitmap(bg,0f,0f,clockPaint)
+            drawComplications(canvas,bounds,zonedDateTime)
         }else{
             val bg = BitmapFactory.decodeResource(context.resources,R.drawable.bg)
             canvas.drawBitmap(bg,0f,0f,clockPaint)
@@ -1653,6 +1693,82 @@ class WatchFace3CanvasRenderer(
             }
         }
     }
+
+
+
+    // ----- All drawing functions -----
+    private fun drawComplications(canvas: Canvas, bounds: Rect, zonedDateTime: ZonedDateTime) {
+        for ((_, complication) in complicationSlotsManager.complicationSlots) {
+            if (complication.enabled) {
+                renderParameters.lastComplicationTapDownEvents
+                complication.render(canvas, zonedDateTime, renderParameters)
+                val batteryStatus: Intent? =
+                    context.registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+                val batteryPct: Float? = batteryStatus?.let { intent ->
+                    val level: Int = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
+                    val scale: Int = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1)
+                    ((level * 100 / scale.toFloat()))
+                }
+                val batteryValue = batteryPct?.toInt() ?: 0
+                //获取日期
+                val date = (Calendar.getInstance().get(Calendar.MONTH)+1).toString()+
+                            "/"+Calendar.getInstance().get(Calendar.DAY_OF_MONTH).toString()
+
+                when (complication.complicationData.value) {
+                    is ShortTextComplicationData -> {
+                        val rangedValueComplicationData =
+                            complication.complicationData.value as ShortTextComplicationData
+                        val applicationIdStr = rangedValueComplicationData.dataSource?.packageName
+                        if (watchFaceData.shapeStyle.shapeType == STYLE1&&watchFaceData.positionStyle.positionStyle == PositionStyle1&&complication.id == TOP_COMPLICATION_ID_1){
+                            complicationPaint1.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
+                            val textWidth = complicationPaint1.measureText("BATT $batteryValue%")
+                            canvas.drawText("BATT $batteryValue%",233f-textWidth/2,411f,complicationPaint1)
+                        }else if (watchFaceData.shapeStyle.shapeType == STYLE1&&watchFaceData.positionStyle.positionStyle == PositionStyle2&&complication.id == BOTTOM_COMPLICATION_ID_1){
+                            complicationPaint1.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
+                            val textWidth = complicationPaint1.measureText("BATT $batteryValue%")
+                            canvas.drawText("BATT $batteryValue%",233f-textWidth/2,50f,complicationPaint1)
+                        }else if(watchFaceData.shapeStyle.shapeType == STYLE2 && watchFaceData.positionStyle.positionStyle == PositionStyle1){
+                            complicationPaint2.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
+                            val textWidth = complicationPaint2.measureText(date)
+                            canvas.drawText(date,233f-textWidth/2,183f,complicationPaint2)
+                        }else if(watchFaceData.shapeStyle.shapeType == STYLE2 && watchFaceData.positionStyle.positionStyle == PositionStyle2){
+                            complicationPaint2.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
+                            val textWidth = complicationPaint2.measureText(date)
+                            canvas.drawText(date,233f-textWidth/2,336f,complicationPaint2)
+                        }else if(watchFaceData.shapeStyle.shapeType == STYLE2 && watchFaceData.positionStyle.positionStyle == PositionStyle3){
+                            complicationPaint2.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
+                            canvas.drawText(date,70f,260f,complicationPaint2)
+                        }else if(watchFaceData.shapeStyle.shapeType == STYLE2 && watchFaceData.positionStyle.positionStyle == PositionStyle4){
+                            complicationPaint2.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
+                            canvas.drawText(date,300f,260f,complicationPaint2)
+                        }else if (watchFaceData.shapeStyle.shapeType == STYLE5 && watchFaceData.positionStyle.positionStyle == PositionStyle1){
+                            complicationPaint3.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
+                            complicationPaint4.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
+                            canvas.drawText("[Steps]",40f,265f,complicationPaint3)
+                            canvas.drawText("2526",156f,265f,complicationPaint4)
+                        }else if (watchFaceData.shapeStyle.shapeType == STYLE5 && watchFaceData.positionStyle.positionStyle == PositionStyle2){
+                            complicationPaint3.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
+                            complicationPaint4.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
+                            canvas.drawText("[Steps]",241f,265f,complicationPaint3)
+                            canvas.drawText("2526",355f,265f,complicationPaint4)
+                        }else if (watchFaceData.shapeStyle.shapeType == STYLE6&& watchFaceData.positionStyle.positionStyle == PositionStyle1){
+                            complicationPaint5.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
+                            canvas.drawText("2560 steps",179f,423f,complicationPaint5)
+                        }else if (watchFaceData.shapeStyle.shapeType == STYLE6&& watchFaceData.positionStyle.positionStyle == PositionStyle2){
+                            complicationPaint5.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
+                            canvas.drawText("2560 steps",179f,140f,complicationPaint5)
+                        }else if (watchFaceData.shapeStyle.shapeType == STYLE6&& watchFaceData.positionStyle.positionStyle == PositionStyle3){
+                            complicationPaint5.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
+                            canvas.drawText("2560 steps",310f,280f,complicationPaint5)
+                        }
+                    }
+
+                    else -> {}
+                }
+            }
+        }
+    }
+
 
 
 
