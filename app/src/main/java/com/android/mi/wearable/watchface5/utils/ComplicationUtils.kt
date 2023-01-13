@@ -298,10 +298,10 @@ fun createComplicationSlotManager(
         ),
         bounds = ComplicationSlotBounds(
             RectF(
-                0.4f,
-                0.35f,
-                0.62f,
-                0.4f
+                0.1f,
+                0.53f,
+                0.32f,
+                0.58f
             )
         )
     ).build()
@@ -316,18 +316,115 @@ fun createComplicationSlotManager(
         ),
         bounds = ComplicationSlotBounds(
             RectF(
-                0.4f,
-                0.67f,
-                0.62f,
-                0.72f
+                0.6f,
+                0.53f,
+                0.82f,
+                0.58f
+            )
+        )
+    ).build()
+
+    //style5
+    val leftComplication5 = ComplicationSlot.createRoundRectComplicationSlotBuilder(
+        id = ComplicationConfig.Left5.id,
+        canvasComplicationFactory = defaultLeftCanvasComplicationFactory,
+        supportedTypes = ComplicationConfig.Left5.supportedTypes,
+        defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
+            SystemDataSources.DATA_SOURCE_APP_SHORTCUT,
+            ComplicationType.SHORT_TEXT
+        ),
+        bounds = ComplicationSlotBounds(
+            RectF(
+                0.1f,
+                0.53f,
+                0.45f,
+                0.58f
+            )
+        )
+    ).build()
+
+    val rightComplication5 = ComplicationSlot.createRoundRectComplicationSlotBuilder(
+        id = ComplicationConfig.Right5.id,
+        canvasComplicationFactory = defaultRightCanvasComplicationFactory,
+        supportedTypes = ComplicationConfig.Right5.supportedTypes,
+        defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
+            SystemDataSources.DATA_SOURCE_WATCH_BATTERY,
+            ComplicationType.RANGED_VALUE
+        ),
+        bounds = ComplicationSlotBounds(
+            RectF(
+                0.55f,
+                0.53f,
+                0.90f,
+                0.58f
+            )
+        )
+    ).build()
+
+
+    //style6
+    val topComplication6 = ComplicationSlot.createRoundRectComplicationSlotBuilder(
+        id = ComplicationConfig.Top6.id,
+        canvasComplicationFactory = defaultLeftCanvasComplicationFactory,
+        supportedTypes = ComplicationConfig.Top6.supportedTypes,
+        defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
+            SystemDataSources.DATA_SOURCE_APP_SHORTCUT,
+            ComplicationType.SHORT_TEXT
+        ),
+        bounds = ComplicationSlotBounds(
+            RectF(
+                0.3f,
+                0.9f,
+                0.72f,
+                0.95f
+            )
+        )
+    ).build()
+
+    val bottomComplication6 = ComplicationSlot.createRoundRectComplicationSlotBuilder(
+        id = ComplicationConfig.Bottom6.id,
+        canvasComplicationFactory = defaultRightCanvasComplicationFactory,
+        supportedTypes = ComplicationConfig.Bottom6.supportedTypes,
+        defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
+            SystemDataSources.DATA_SOURCE_WATCH_BATTERY,
+            ComplicationType.RANGED_VALUE
+        ),
+        bounds = ComplicationSlotBounds(
+            RectF(
+                0.3f,
+                0.3f,
+                0.72f,
+                0.35f
+            )
+        )
+    ).build()
+
+
+    val rightComplication6 = ComplicationSlot.createRoundRectComplicationSlotBuilder(
+        id = ComplicationConfig.Right6.id,
+        canvasComplicationFactory = defaultLeftCanvasComplicationFactory,
+        supportedTypes = ComplicationConfig.Right6.supportedTypes,
+        defaultDataSourcePolicy = DefaultComplicationDataSourcePolicy(
+            SystemDataSources.DATA_SOURCE_APP_SHORTCUT,
+            ComplicationType.SHORT_TEXT
+        ),
+        bounds = ComplicationSlotBounds(
+            RectF(
+                0.58f,
+                0.58f,
+                0.95f,
+                0.67f
             )
         )
     ).build()
 
 
 
+
+
+
     return ComplicationSlotsManager(
-        listOf(topComplication1, bottomComplication1,topComplication2,bottomComplication2,leftComplication2,rightComplication2),
+        listOf(topComplication1, bottomComplication1,topComplication2,bottomComplication2,leftComplication2,rightComplication2,leftComplication5,rightComplication5,topComplication6,bottomComplication6,rightComplication6),
         currentUserStyleRepository
     )
 }

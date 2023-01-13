@@ -101,6 +101,16 @@ class WatchFaceConfigStateHolder(
             topOrBottom = LEFT_COMPLICATION_ID_2
         }else if (FinalStatic.currentStylePosition == 1 && FinalStatic.currentPositionPosition == 3){
             topOrBottom = RIGHT_COMPLICATION_ID_2
+        }else if (FinalStatic.currentStylePosition == 4 && FinalStatic.currentPositionPosition == 0){
+            topOrBottom = LEFT_COMPLICATION_ID_5
+        }else if (FinalStatic.currentStylePosition == 4 && FinalStatic.currentPositionPosition == 1){
+            topOrBottom = RIGHT_COMPLICATION_ID_5
+        }else if (FinalStatic.currentStylePosition == 5 && FinalStatic.currentPositionPosition == 0){
+            topOrBottom = TOP_COMPLICATION_ID_6
+        }else if (FinalStatic.currentStylePosition == 5 && FinalStatic.currentPositionPosition == 1){
+            topOrBottom = BOTTOM_COMPLICATION_ID_6
+        }else if (FinalStatic.currentStylePosition == 5 && FinalStatic.currentPositionPosition == 2){
+            topOrBottom = RIGHT_COMPLICATION_ID_6
         }
 
         val highlightLayer1 = if (showHighlightLayer) RenderParameters.HighlightLayer(
@@ -176,6 +186,21 @@ class WatchFaceConfigStateHolder(
             }
             RIGHT_COMPLICATION_ID_2 -> {
                 RIGHT_COMPLICATION_ID_2
+            }
+            LEFT_COMPLICATION_ID_5 -> {
+                LEFT_COMPLICATION_ID_5
+            }
+            RIGHT_COMPLICATION_ID_5 ->{
+                RIGHT_COMPLICATION_ID_5
+            }
+            TOP_COMPLICATION_ID_6 ->{
+                TOP_COMPLICATION_ID_6
+            }
+            BOTTOM_COMPLICATION_ID_6 -> {
+                BOTTOM_COMPLICATION_ID_6
+            }
+            RIGHT_COMPLICATION_ID_6 -> {
+                RIGHT_COMPLICATION_ID_6
             }
             else -> {
                 return
