@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">WatchFace3</string>
+    <string name="app_name">AlbumWatchFace</string>
     <string name="message">Watch face tapped</string>
-    <string name="my_analog_name">逐光</string>
+    <string name="my_analog_name">相册表盘</string>
     <string name="title_activity_watch_face_config">Configuration</string>
 
     <!-- Name of watchface style category for selecting the color theme [CHAR LIMIT=20] -->

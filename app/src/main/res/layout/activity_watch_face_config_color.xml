@@ -5,10 +5,10 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.android.mi.wearable.watchface5.view.IndicatorView
+    <com.android.mi.wearable.albumwatchface.view.IndicatorView
         android:id="@+id/indicatorView"
-        android:layout_width="400px"
-        android:layout_height="87px"
+        android:layout_width="420px"
+        android:layout_height="90px"
         android:background="@android:color/transparent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"

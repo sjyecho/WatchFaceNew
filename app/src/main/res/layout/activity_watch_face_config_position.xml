@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.android.mi.wearable.watchface5.view.SlideHandleView
+<com.android.mi.wearable.albumwatchface.view.SlideHandleView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -8,7 +8,7 @@
     android:background="@android:color/transparent"
     app:openSlide="true">
 
-    <com.android.mi.wearable.watchface5.view.IndicatorViewPosition
+    <com.android.mi.wearable.albumwatchface.view.IndicatorViewPosition
         android:id="@+id/indicatorViewPosition"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -36,4 +36,4 @@
         android:text="Position"
         />
 
-</com.android.mi.wearable.watchface5.view.SlideHandleView>
+</com.android.mi.wearable.albumwatchface.view.SlideHandleView>

@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "WatchFace5"
+rootProject.name = "AlbumWatchFace"
 include ':app'

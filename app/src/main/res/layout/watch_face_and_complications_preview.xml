@@ -34,7 +34,7 @@
         android:layout_height="@dimen/analog_complication_settings_preview_size"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:background="@color/black"
+        android:background="@color/transparent"
         android:contentDescription="Screenshot of Watch Face"
         android:scaleType="fitXY"
         android:padding="15dp"

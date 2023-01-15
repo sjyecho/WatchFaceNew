@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.android.mi.wearable.watchface5'
+    namespace 'com.android.mi.wearable.albumwatchface'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.android.mi.wearable.watchface5"
+        applicationId "com.android.mi.wearable.albumwatchface"
         minSdk 30
         targetSdk 32
         versionCode 1

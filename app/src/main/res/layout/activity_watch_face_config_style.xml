@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.android.mi.wearable.watchface5.view.SlideHandleView
+<com.android.mi.wearable.albumwatchface.view.SlideHandleView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,7 +10,7 @@
     tools:context=".editor.WatchFace5ConfigActivity"
     app:openSlide="true">
 
-    <com.android.mi.wearable.watchface5.view.IndicatorViewStyle
+    <com.android.mi.wearable.albumwatchface.view.IndicatorViewStyle
         android:id="@+id/indicatorViewStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -38,5 +38,5 @@
         android:text="Style"
         />
 
-</com.android.mi.wearable.watchface5.view.SlideHandleView>
+</com.android.mi.wearable.albumwatchface.view.SlideHandleView>
 
