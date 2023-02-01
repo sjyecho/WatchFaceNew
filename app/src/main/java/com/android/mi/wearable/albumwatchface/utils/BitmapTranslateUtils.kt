@@ -1,6 +1,7 @@
 package com.android.mi.wearable.albumwatchface.utils
 import com.android.mi.wearable.albumwatchface.R
 import com.android.mi.wearable.albumwatchface.data.watchface.*
+import com.android.mi.wearable.albumwatchface.relay.AlbumFaceConsumer
 import java.util.*
 
 object BitmapTranslateUtils {
@@ -249,6 +250,33 @@ object BitmapTranslateUtils {
         }
     }
 
+    fun currentWeekdayAll7() : String{
+        val weekday = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
+        when ((weekday)) {
+            2 -> {
+                return "Monday"
+            }
+            3 -> {
+                return "Tuesday"
+            }
+            4 -> {
+                return "Wednesday"
+            }
+            5 -> {
+                return "Thursday"
+            }
+            6 -> {
+                return "Friday"
+            }
+            7 -> {
+                return "Saturday"
+            }
+            else -> {
+                return "Sunday"
+            }
+        }
+    }
+
 
 //方案七的时间样式
 //用数组存当前的每个数字
@@ -431,8 +459,25 @@ fun currentTime17(): Array<String>{
             dayArray[1] = dayBit.toString()
         }
         return dayArray
+    }
+
+    fun currentDayAll7(): String{
+        val dayArray = arrayOf("1","1")
+        //获取当前的时间
+        val day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        if (day<10){
+            dayArray[0] = "0"
+            dayArray[1] = day.toString()
+        }else{
+            val dayTen = day / 10 %10
+            val dayBit = day % 10
+            dayArray[0] = dayTen.toString()
+            dayArray[1] = dayBit.toString()
+        }
+        return dayArray[0]+dayArray[1]
 
     }
+
 
     //方案7获取当前的月份
     fun currentMonth7(): Array<String> {
@@ -504,6 +549,79 @@ fun currentTime17(): Array<String>{
         return dayArray
 
     }
+    fun currentMonthAll7(): String {
+        //先定义一个数组
+        val dayArray = arrayOf("0", "0", "0")
+        //获取当前的月份
+        when (Calendar.getInstance().get(Calendar.MONTH)) {
+            0 -> {
+                dayArray[0] = "J"
+                dayArray[1] = "A"
+                dayArray[2] = "N"
+            }
+            1 -> {
+                dayArray[0] = "F"
+                dayArray[1] = "E"
+                dayArray[2] = "B"
+            }
+            2 -> {
+                dayArray[0] = "M"
+                dayArray[1] = "A"
+                dayArray[2] = "R"
+            }
+            3 -> {
+                dayArray[0] = "A"
+                dayArray[1] = "P"
+                dayArray[2] = "R"
+            }
+            4 -> {
+                dayArray[0] = "M"
+                dayArray[1] = "A"
+                dayArray[2] = "Y"
+            }
+            5 -> {
+                dayArray[0] = "J"
+                dayArray[1] = "U"
+                dayArray[2] = "N"
+            }
+            6 -> {
+                dayArray[0] = "J"
+                dayArray[1] = "U"
+                dayArray[2] = "L"
+            }
+            7 -> {
+                dayArray[0] = "A"
+                dayArray[1] = "U"
+                dayArray[2] = "G"
+            }
+            8 -> {
+                dayArray[0] = "S"
+                dayArray[1] = "E"
+                dayArray[2] = "T"
+            }
+            9 -> {
+                dayArray[0] = "O"
+                dayArray[1] = "C"
+                dayArray[2] = "T"
+            }
+            10 -> {
+                dayArray[0] = "N"
+                dayArray[1] = "O"
+                dayArray[2] = "V"
+            }
+            11 -> {
+                dayArray[0] = "D"
+                dayArray[1] = "E"
+                dayArray[2] = "C"
+            }
+        }
+        return dayArray[0]+dayArray[1]+dayArray[2]
+
+    }
+
+
+
+
     //方案九获取当前的月份
     fun currentDay9(): String{
         //先定义一个数组

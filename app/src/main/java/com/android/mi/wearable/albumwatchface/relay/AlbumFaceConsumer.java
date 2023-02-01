@@ -21,6 +21,7 @@ public class AlbumFaceConsumer implements TransmitConsumer {
     private static AlbumFaceConsumer mConsumer;
 
     public AlbumFaceConsumer(Context context) {
+        Log.d(TAG, "AlbumFaceConsumer: "+"当前是否走这里");
         this.mContext = context;
     }
 
@@ -39,6 +40,8 @@ public class AlbumFaceConsumer implements TransmitConsumer {
 
         mResponse.id = request.id;
         mResponse.type = request.type;
+        Log.d(TAG, "onMessageReceived: "+request.id);
+        Log.d(TAG, "onMessageReceived: "+mResponse.id);
 
         // 编辑表盘，信息在editRequest
         if (WatchFaceProtos.WatchFace.EDIT_WATCH_FACE == request.id){
@@ -48,6 +51,7 @@ public class AlbumFaceConsumer implements TransmitConsumer {
             /*editRequest.backgroundColor*/ //背景颜色
             /*editRequest.backgroundImage*/ //背景图片
             /*editRequest.style*/ //样式
+            Log.d(TAG, "onMessageReceived: "+editRequest.backgroundImage);
 
             // todo 背景替换、添加或者删除图片、表盘样式修改
 //            //颜色替换 获取当前的rgb
@@ -56,6 +60,7 @@ public class AlbumFaceConsumer implements TransmitConsumer {
 //            editRequest.backgroundImage =
 //            //样式替换也就是位置替换
 //            editRequest.style =
+
 
 
 
@@ -88,6 +93,7 @@ public class AlbumFaceConsumer implements TransmitConsumer {
      * 上报相册表盘图片接收结果
      * */
     public synchronized void sendBgImgResultToPhone(){
+        Log.d("wjjjjj", "sendBgImgResultToPhone: ");
         WearProtos.WearPacket response = new WearProtos.WearPacket();
         WatchFaceProtos.WatchFace watchFace = new WatchFaceProtos.WatchFace();
         WatchFaceProtos.BgImageResult bgImageResult = new WatchFaceProtos.BgImageResult();

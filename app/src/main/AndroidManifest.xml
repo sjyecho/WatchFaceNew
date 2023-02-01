@@ -11,6 +11,7 @@
 
     <application
         android:allowBackup="true"
+        android:name=".GalleryFaceApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
@@ -61,7 +62,7 @@
         </service>
 
         <activity
-                android:name=".editor.WatchFace5ConfigActivity"
+            android:name=".editor.WatchFace5ConfigActivity"
             android:exported="true"
             android:label="@string/title_activity_watch_face_config">
 

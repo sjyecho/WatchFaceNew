@@ -44,10 +44,24 @@ class WatchFace3CanvasRenderer(
     FRAME_PERIOD_MS_DEFAULT,
     clearWithBackgroundTintBeforeRenderingHighlightLayer = false
 ) {
+    //绘制当前的方案七旋转字体
+    private val style7PathPaint = Paint().apply {
+        color = Color.TRANSPARENT
+        isAntiAlias = true
+        textAlign = Paint.Align.RIGHT
+    }
+
+    private val style7PathPaint1 = Paint().apply {
+        color = Color.TRANSPARENT
+        isAntiAlias = true
+        textAlign = Paint.Align.RIGHT
+    }
+
+
+
     /**
      * 相册表表盘的字体文件
      */
-    //TODO 现在统一用运动ttf代替后期需要替换
     private var watchFaceData: WatchFaceData = WatchFaceData()
     private val textPaint = Paint().apply {
         isAntiAlias = true
@@ -79,13 +93,13 @@ class WatchFace3CanvasRenderer(
     private val style1Paint1 = Paint().apply {
         typeface = Typeface.createFromAsset(context.assets,"fonts/BalooChettan2-Bold.ttf")
         color = context.getColor(watchFaceData.activeColorStyle.colorInt)
-        textSize = 104f
+        textSize = (screenBounds.width() * 104f) / 466f
         isAntiAlias = true
     }
     private val style1Paint2 = Paint().apply {
        typeface = Typeface.createFromAsset(context.assets,"fonts/BalooChettan2-Bold.ttf")
        color = context.getColor(R.color.style1_always)
-       textSize = 104f
+       textSize =  (screenBounds.width() * 104f) / 466f
        isAntiAlias = true
     }
 
@@ -93,7 +107,7 @@ class WatchFace3CanvasRenderer(
     private val style2paint1 = Paint().apply {
         typeface = Typeface.createFromAsset(context.assets,"fonts/MiSans_Demibold.ttf")
         color = Color.WHITE
-        textSize = 22f
+        textSize = (screenBounds.width() * 22f) / 466f
         letterSpacing = 0.19f
         isAntiAlias = true
     }
@@ -103,18 +117,18 @@ class WatchFace3CanvasRenderer(
         typeface = Typeface.createFromAsset(context.assets,"fonts/RobotoText-Regular.otf")
         color = Color.WHITE
         alpha =  20
-        textSize = 42f
+        textSize = (screenBounds.width() * 42f) / 466f
         isAntiAlias = true
     }
     private val style3Paint2 = Paint().apply {
         typeface = Typeface.createFromAsset(context.assets,"fonts/RobotoFlex-Regular.ttf")
-        textSize = 22f
+        textSize = (screenBounds.width() * 22f) / 466f
         color = Color.WHITE
         isAntiAlias = true
     }
     private val style3Paint3 = Paint().apply {
         typeface = Typeface.createFromAsset(context.assets,"fonts/RobotoFlex-Regular.ttf")
-        textSize = 22f
+        textSize = (screenBounds.width() * 22f) / 466f
         color = context.getColor(R.color.style3_always)
         isAntiAlias = true
     }
@@ -123,7 +137,7 @@ class WatchFace3CanvasRenderer(
     private val style4Paint1 = Paint().apply {
         typeface = Typeface.createFromAsset(context.assets,"fonts/MiSans_Light.ttf")
         color = Color.WHITE
-        textSize = 36f
+        textSize = (screenBounds.width() * 36f) / 466f
         isAntiAlias = true
 
     }
@@ -131,17 +145,17 @@ class WatchFace3CanvasRenderer(
         isAntiAlias = true
         typeface = Typeface.createFromAsset(context.assets, "fonts/MiSans_Semibold.ttf")
         color = Color.WHITE
-        textSize = 36f
+        textSize = (screenBounds.width() * 36f) / 466f
     }
     private val style4Paint3 = Paint().apply {
         isAntiAlias = true
         typeface = Typeface.createFromAsset(context.assets, "fonts/MiSans_Semibold.ttf")
         color = Color.WHITE
-        textSize = 20f
+        textSize = (screenBounds.width() * 20f) / 466f
     }
     private val style4Paint4 = Paint().apply {
         isAntiAlias = true
-        textSize = 36f
+        textSize = (screenBounds.width() * 36f) / 466f
         typeface = Typeface.createFromAsset(context.assets, "fonts/MiSans_Semibold.ttf")
         color = Color.WHITE
     }
@@ -149,24 +163,24 @@ class WatchFace3CanvasRenderer(
     //style5paint
     private val style5Paint1 = Paint().apply {
         typeface = Typeface.createFromAsset(context.assets, "fonts/MiSans_Light.ttf")
-        textSize = 36f
+        textSize = (screenBounds.width() * 36f) / 466f
         color = Color.WHITE
         isAntiAlias = true
     }
     private val style5Paint2 = Paint().apply {
         typeface = Typeface.createFromAsset(context.assets, "fonts/MiSans_Medium.ttf")
-        textSize = 22f
+        textSize = (screenBounds.width() * 22f) / 466f
         color = Color.WHITE
         isAntiAlias = true
     }
     private val style5Paint3 = Paint().apply {
-        textSize = 36f
+        textSize = (screenBounds.width() * 36f) / 466f
         typeface = Typeface.createFromAsset(context.assets, "fonts/MiSans_Semibold.ttf")
         color = Color.WHITE
         isAntiAlias = true
     }
     private val style5Paint4 = Paint().apply {
-        textSize = 24f
+        textSize = (screenBounds.width() * 24f) / 466f
         typeface = Typeface.createFromAsset(context.assets, "fonts/MiSans_Semibold.ttf")
         color = Color.WHITE
         isAntiAlias = true
@@ -174,24 +188,24 @@ class WatchFace3CanvasRenderer(
     //style5always
     private val style5Paint5 = Paint().apply {
         typeface = Typeface.createFromAsset(context.assets, "fonts/MiSans_Light.ttf")
-        textSize = 36f
+        textSize = (screenBounds.width() * 36f) / 466f
         color = context.getColor(R.color.style3_always)
         isAntiAlias = true
     }
     private val style5Paint6 = Paint().apply {
         typeface = Typeface.createFromAsset(context.assets, "fonts/MiSans_Medium.ttf")
-        textSize = 22f
+        textSize = (screenBounds.width() * 22f) / 466f
         color = context.getColor(R.color.style3_always)
         isAntiAlias = true
     }
     private val style5Paint7 = Paint().apply {
-        textSize = 36f
+        textSize = (screenBounds.width() * 36f) / 466f
         typeface = Typeface.createFromAsset(context.assets, "fonts/MiSans_Semibold.ttf")
         color = context.getColor(R.color.style3_always)
         isAntiAlias = true
     }
     private val style5Paint8 = Paint().apply {
-        textSize = 24f
+        textSize = (screenBounds.width() * 24f) / 466f
         typeface = Typeface.createFromAsset(context.assets, "fonts/MiSans_Semibold.ttf")
         color = context.getColor(R.color.style3_always)
         isAntiAlias = true
@@ -201,24 +215,24 @@ class WatchFace3CanvasRenderer(
     private val style6Paint1 = Paint().apply {
         typeface = Typeface.createFromAsset(context.assets,"fonts/yundong.ttf")
         color = Color.WHITE
-        textSize = 56f
+        textSize = (screenBounds.width() * 56f) / 466f
         isAntiAlias = true
     }
     private val style6Paint2 = Paint().apply {
         typeface = Typeface.createFromAsset(context.assets,"fonts/MiSans_Medium.ttf")
-        textSize = 24f
+        textSize = (screenBounds.width() * 24f) / 466f
         color = Color.WHITE
         isAntiAlias = true
     }
     private val style6Paint3 = Paint().apply {
         typeface = Typeface.createFromAsset(context.assets,"fonts/yundong.ttf")
         color = context.getColor(R.color.style6_always_1)
-        textSize = 56f
+        textSize = (screenBounds.width() * 56f) / 466f
         isAntiAlias = true
     }
     private val style6Paint4 = Paint().apply {
         typeface = Typeface.createFromAsset(context.assets,"fonts/MiSans_Medium.ttf")
-        textSize = 32f
+        textSize = (screenBounds.width() * 32f) / 466f
         color = context.getColor(R.color.style6_always)
         isAntiAlias = true
     }
@@ -227,45 +241,45 @@ class WatchFace3CanvasRenderer(
     private val style7Paint1 = Paint().apply {
         typeface = Typeface.createFromAsset(context.assets,"fonts/yundong.ttf")
         color = Color.WHITE
-        textSize = 64f
+        textSize = (screenBounds.width() * 64f) / 466f
         isAntiAlias = true
     }
     private val style7Paint2 = Paint().apply {
         typeface = Typeface.createFromAsset(context.assets,"fonts/yundong.ttf")
         color = Color.WHITE
-        textSize = 32f
+        textSize = (screenBounds.width() * 32f) / 466f
         isAntiAlias = true
     }
     private val style7Paint3 = Paint().apply {
         typeface = Typeface.createFromAsset(context.assets,"fonts/yundong.ttf")
         color = context.getColor(R.color.style1_always)
-        textSize = 64f
+        textSize = (screenBounds.width() * 64f) / 466f
         isAntiAlias = true
     }
 
     //style8
     private val style8Paint1 = Paint().apply {
         typeface = Typeface.createFromAsset(context.assets, "fonts/MiSans_Semibold.ttf")
-        textSize = 22f
+        textSize = (screenBounds.width() * 22f) / 466f
         color = Color.WHITE
         isAntiAlias = true
     }
     private val style8Paint2 = Paint().apply {
         typeface = Typeface.createFromAsset(context.assets, "fonts/MiSans_Semibold.ttf")
-        textSize = 18f
+        textSize = (screenBounds.width() * 18f) / 466f
         color = Color.WHITE
         isAntiAlias = true
     }
     private val style8Paint3 = Paint().apply {
         typeface = Typeface.createFromAsset(context.assets, "fonts/MiSans_Semibold.ttf")
-        textSize = 18f
+        textSize = (screenBounds.width() * 18f) / 466f
         color = Color.WHITE
         letterSpacing = 0.04f
         isAntiAlias = true
     }
     private val style8Paint4 = Paint().apply {
         typeface = Typeface.createFromAsset(context.assets, "fonts/MiSans_Semibold.ttf")
-        textSize = 120f
+        textSize = (screenBounds.width() * 120f) / 466f
         color = Color.WHITE
         alpha = 40
         isAntiAlias = true
@@ -275,7 +289,7 @@ class WatchFace3CanvasRenderer(
     private val style9Paint1 = Paint().apply {
         typeface = Typeface.createFromAsset(context.assets,"fonts/MiSans_Normal.ttf")
         color = Color.WHITE
-        textSize = 59f
+        textSize = (screenBounds.width() * 59f) / 466f
         letterSpacing = -0.02f
         isAntiAlias = true
 
@@ -284,7 +298,7 @@ class WatchFace3CanvasRenderer(
         typeface = Typeface.createFromAsset(context.assets,"fonts/MiSans_Regular.ttf")
         color = Color.WHITE
         alpha = 30
-        textSize = 108f
+        textSize = (screenBounds.width() * 108f) / 466f
         isAntiAlias = true
     }
 
@@ -297,7 +311,7 @@ class WatchFace3CanvasRenderer(
     private val complicationPaint1 = Paint().apply {
         typeface = Typeface.createFromAsset(context.assets,"fonts/BalooChettan2-SemiBold.ttf")
         isAntiAlias = true
-        textSize = 24f
+        textSize = (screenBounds.width() * 24f) / 466f
         color = Color.WHITE
     }
 
@@ -305,20 +319,20 @@ class WatchFace3CanvasRenderer(
         typeface = Typeface.createFromAsset(context.assets,"fonts/MiSans_Demibold.ttf")
         color = Color.WHITE
         isAntiAlias = true
-        textSize = 24f
+        textSize = (screenBounds.width() * 24f) / 466f
     }
 
     private val complicationPaint3 = Paint().apply {
         typeface = Typeface.createFromAsset(context.assets,"fonts/MiSans_Light.ttf")
         color = Color.WHITE
         isAntiAlias = true
-        textSize = 36f
+        textSize = (screenBounds.width() * 36f) / 466f
     }
     private val complicationPaint4 = Paint().apply {
         typeface = Typeface.createFromAsset(context.assets,"fonts/MiSans_Demibold.ttf")
         color = Color.WHITE
         isAntiAlias = true
-        textSize = 36f
+        textSize = (screenBounds.width() * 36f) / 466f
     }
 
 
@@ -326,7 +340,7 @@ class WatchFace3CanvasRenderer(
         typeface = Typeface.createFromAsset(context.assets,"fonts/MiSans_Medium.ttf")
         color = Color.WHITE
         isAntiAlias = true
-        textSize = 24f
+        textSize = (screenBounds.width() * 24f) / 466f
     }
 
 
@@ -426,7 +440,7 @@ class WatchFace3CanvasRenderer(
         val drawAmbient = renderParameters.drawMode == DrawMode.AMBIENT
         if (!drawAmbient){
             val bg = BitmapFactory.decodeResource(context.resources,BitmapTranslateUtils.currentBg(watchFaceData.shapeStyle.shapeType))
-            canvas.drawBitmap(bg,0f,0f,clockPaint)
+            canvas.drawBitmap(bg,null, bounds   ,clockPaint)
             drawComplications(canvas,bounds,zonedDateTime)
         }else{
             val bg = BitmapFactory.decodeResource(context.resources,R.drawable.bg)
@@ -434,7 +448,6 @@ class WatchFace3CanvasRenderer(
         }
 
         drawTime(canvas,bounds,zonedDateTime)
-
     }
 
 
@@ -471,7 +484,7 @@ class WatchFace3CanvasRenderer(
         if (watchFaceData.shapeStyle.shapeType == STYLE2 && !drawAmbient){
             //绘制方案二的index
             val indexBg = BitmapFactory.decodeResource(context.resources,R.drawable.index)
-            canvas.drawBitmap(indexBg,0f,0f,clockPaint)
+            canvas.drawBitmap(indexBg,null, bounds  ,clockPaint)
             //当前字体的样式
             val textWidth: Float = style2paint1.measureText(BitmapTranslateUtils.currentWeekdayAll())
             //绘制当前的星期
@@ -946,25 +959,21 @@ class WatchFace3CanvasRenderer(
             //经当前笔的样式绘制下来
             style7Paint1.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
             style7Paint2.color = context.getColor(watchFaceData.activeColorStyle.colorInt)
-
             if (watchFaceData.positionStyle.positionStyle == PositionStyle1){
-                //绘制旋转时间
-                val timeArray = BitmapTranslateUtils.currentTime17()
-                canvas.withRotation (16.57f,bounds.exactCenterX(),bounds.exactCenterY()){
-                    drawText(timeArray[0],205f,80f,style7Paint1)
-                }
-                canvas.withRotation (33.26f,bounds.exactCenterX(),bounds.exactCenterY()){
-                    drawText(timeArray[1],210f,80f,style7Paint1)
-                }
-                canvas.withRotation (44.65f,bounds.exactCenterX(),bounds.exactCenterY()){
-                    drawText(timeArray[2],225f,80f,style7Paint1)
-                }
-                canvas.withRotation (56.11f,bounds.exactCenterX(),bounds.exactCenterY()){
-                    drawText(timeArray[3],210f,80f,style7Paint1)
-                }
-                canvas.withRotation (72.49f,bounds.exactCenterX(),bounds.exactCenterY()){
-                    drawText(timeArray[4],208f,80f,style7Paint1)
-                }
+                //绘制当前的时间
+                val path = Path()
+                val rectF  = RectF(15f,15f,436f,436f)
+                path.addArc(rectF,-72.49f,60f)
+                canvas.drawPath(path,style7PathPaint)
+                canvas.drawTextOnPath(BitmapTranslateUtils.currentTime(),path,0f,50f,style7Paint1)
+                //绘制当前的月份和日期和星期
+//                val path1 = Path()
+//                val rectF1  = RectF(25f,25f,416f,400f)
+//                path1.addOval(rectF1,Path.Direction.CCW)
+//                canvas.drawPath(path1,style7PathPaint1)
+//                canvas.withRotation(180f,bounds.exactCenterX(),bounds.exactCenterY()){
+//                    canvas.drawTextOnPath(BitmapTranslateUtils.currentMonthAll7()+" "+BitmapTranslateUtils.currentDayAll7()+"  "+BitmapTranslateUtils.currentWeekdayAll7(),path1,0f,20f,style7Paint2)
+//                }
                 //绘制旋转的月份
                 val monthArray = BitmapTranslateUtils.currentMonth7()
                 canvas.withRotation (85.99f,bounds.exactCenterX(),bounds.exactCenterY()){
@@ -1158,7 +1167,6 @@ class WatchFace3CanvasRenderer(
                         drawText(weekArray[7],230f,450f,style7Paint2)
                     }
                 }
-
             }else if (watchFaceData.positionStyle.positionStyle == PositionStyle2){
                 //绘制旋转时间
                 val timeArray = BitmapTranslateUtils.currentTime17()

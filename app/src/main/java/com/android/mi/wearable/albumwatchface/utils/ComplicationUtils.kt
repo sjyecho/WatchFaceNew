@@ -69,7 +69,7 @@ sealed class ComplicationConfig(val id: Int, val supportedTypes: List<Complicati
     object Top1 : ComplicationConfig(
         TOP_COMPLICATION_ID_1,
         listOf(
-
+            ComplicationType.LONG_TEXT,
             ComplicationType.SHORT_TEXT,
 
         )
@@ -134,8 +134,6 @@ sealed class ComplicationConfig(val id: Int, val supportedTypes: List<Complicati
     object Right5 : ComplicationConfig(
         RIGHT_COMPLICATION_ID_5,
         listOf(
-            ComplicationType.PHOTO_IMAGE,
-
             ComplicationType.SHORT_TEXT,
 
         )

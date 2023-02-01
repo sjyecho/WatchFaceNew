@@ -14,4 +14,6 @@ class FinalStatic {
         var currentPositionPosition = 0
 
     }
+
+
 }
