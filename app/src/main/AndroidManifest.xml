@@ -72,6 +72,21 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+
+        <service
+            android:name="com.xiaomi.wear.transmit.TransmitRXService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.xiaomi.wearable.transmit.MESSAGE_RECEIVED" />
+                <!-- path -->
+                <data
+                    android:host="transmit"
+                    android:pathPrefix="/watchface"
+                    android:scheme="miwatch" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
