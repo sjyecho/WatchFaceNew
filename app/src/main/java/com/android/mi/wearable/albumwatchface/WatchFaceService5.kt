@@ -7,7 +7,7 @@ import androidx.wear.watchface.style.UserStyleSchema
 import com.android.mi.wearable.albumwatchface.utils.createComplicationSlotManager
 import com.android.mi.wearable.albumwatchface.utils.createUserStyleSchema
 
-class WatchFaceService5 : WatchFaceService(),WatchFace.TapListener{
+class WatchFaceService5 : WatchFaceService(){
 
 
     override fun createUserStyleSchema(): UserStyleSchema = createUserStyleSchema(context = applicationContext)
@@ -44,8 +44,8 @@ class WatchFaceService5 : WatchFaceService(),WatchFace.TapListener{
         )
     }
 
-    override fun onTapEvent(tapType: Int, tapEvent: TapEvent, complicationSlot: ComplicationSlot?) {
-
-    }
+//    override fun onTapEvent(tapType: Int, tapEvent: TapEvent, complicationSlot: ComplicationSlot?) {
+//
+//    }
 
 }

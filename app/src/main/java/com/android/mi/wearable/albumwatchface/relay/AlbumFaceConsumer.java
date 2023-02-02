@@ -14,7 +14,7 @@ import com.xiaomi.wear.transmit.TransmitConsumer;
 import com.xiaomi.wear.transmit.TransmitManager;
 
 public class AlbumFaceConsumer implements TransmitConsumer {
-    private static final String TAG = AlbumFaceConsumer.class.getName();
+    private static final String TAG = "wnjjjj";
     private Context mContext;
     private static WearProtos.WearPacket request = new WearProtos.WearPacket();
     private static WearProtos.WearPacket mResponse = new WearProtos.WearPacket();
@@ -37,7 +37,7 @@ public class AlbumFaceConsumer implements TransmitConsumer {
         TransmitConsumer.super.onMessageReceived(path, data);
         WearProtos.WearPacket request = WearProtos.WearPacket.parseFrom(data);
         Log.d(TAG, "onMessageReceived: ");
-
+        Log.d(TAG, "onMessageReceived: "+path+data);
         mResponse.id = request.id;
         mResponse.type = request.type;
         Log.d(TAG, "onMessageReceived: "+request.id);
@@ -47,12 +47,11 @@ public class AlbumFaceConsumer implements TransmitConsumer {
         if (WatchFaceProtos.WatchFace.EDIT_WATCH_FACE == request.id){
             Log.d(TAG, "onMessageReceived: EDIT_WATCH_FACE");
             WatchFaceProtos.EditRequest editRequest = request.getWatchFace().getEditRequest();
-            Log.d(TAG, "onMessageReceived: "+editRequest);
+            Log.d(TAG, "onMessageReceived: "+editRequest.backgroundImageSize);
             /*editRequest.backgroundColor*/ //背景颜色
             /*editRequest.backgroundImage*/ //背景图片
             /*editRequest.style*/ //样式
             Log.d(TAG, "onMessageReceived: "+editRequest.backgroundImage);
-
             // todo 背景替换、添加或者删除图片、表盘样式修改
 //            //颜色替换 获取当前的rgb
 //            editRequest.backgroundColor =

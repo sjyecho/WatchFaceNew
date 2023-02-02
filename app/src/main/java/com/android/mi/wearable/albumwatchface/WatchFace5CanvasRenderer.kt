@@ -1716,7 +1716,6 @@ class WatchFace3CanvasRenderer(
                 //获取日期
                 val date = (Calendar.getInstance().get(Calendar.MONTH)+1).toString()+
                             "/"+Calendar.getInstance().get(Calendar.DAY_OF_MONTH).toString()
-
                 when (complication.complicationData.value) {
                     is ShortTextComplicationData -> {
                         val rangedValueComplicationData =

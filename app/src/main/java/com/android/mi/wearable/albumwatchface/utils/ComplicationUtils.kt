@@ -17,6 +17,7 @@ package com.android.mi.wearable.albumwatchface.utils
 
 import android.content.Context
 import android.graphics.RectF
+import android.util.Log
 import androidx.wear.watchface.CanvasComplicationFactory
 import androidx.wear.watchface.ComplicationSlot
 import androidx.wear.watchface.ComplicationSlotsManager
@@ -28,6 +29,11 @@ import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawabl
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import com.android.mi.wearable.albumwatchface.R
+import com.android.mi.wearable.albumwatchface.data.watchface.FinalStatic
+import com.android.mi.wearable.albumwatchface.data.watchface.PositionStyle1
+import com.android.mi.wearable.albumwatchface.data.watchface.STYLE1
+import com.android.mi.wearable.albumwatchface.data.watchface.STYLE2
+import kotlin.math.log
 
 // Information needed for complications.
 // Creates bounds for the locations of both right and left complications. (This is the
@@ -69,18 +75,14 @@ sealed class ComplicationConfig(val id: Int, val supportedTypes: List<Complicati
     object Top1 : ComplicationConfig(
         TOP_COMPLICATION_ID_1,
         listOf(
-            ComplicationType.LONG_TEXT,
             ComplicationType.SHORT_TEXT,
-
         )
     )
 
     object Bottom1 : ComplicationConfig(
         BOTTOM_COMPLICATION_ID_1,
         listOf(
-
             ComplicationType.SHORT_TEXT,
-
         )
     )
 
@@ -89,27 +91,20 @@ sealed class ComplicationConfig(val id: Int, val supportedTypes: List<Complicati
     object Top2 : ComplicationConfig(
         TOP_COMPLICATION_ID_2,
         listOf(
-
             ComplicationType.SHORT_TEXT,
-
         )
     )
 
     object Bottom2 : ComplicationConfig(
         BOTTOM_COMPLICATION_ID_2,
         listOf(
-
             ComplicationType.SHORT_TEXT,
-
         )
     )
     object Left2 : ComplicationConfig(
         LEFT_COMPLICATION_ID_2,
         listOf(
-
-
            ComplicationType.SHORT_TEXT,
-
         )
     )
 
@@ -393,8 +388,6 @@ fun createComplicationSlotManager(
             )
         )
     ).build()
-
-
 
 
 
