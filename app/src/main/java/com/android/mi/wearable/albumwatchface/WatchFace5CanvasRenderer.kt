@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.*
 import android.os.BatteryManager
+import android.util.Log
 import android.view.SurfaceHolder
 import androidx.core.graphics.withRotation
 import androidx.wear.watchface.*
@@ -14,14 +15,14 @@ import androidx.wear.watchface.style.UserStyle
 import androidx.wear.watchface.style.UserStyleSetting
 import com.android.mi.wearable.albumwatchface.data.watchface.*
 import com.android.mi.wearable.albumwatchface.utils.*
-import com.android.mi.wearable.albumwatchface.utils.TOP_COMPLICATION_ID_1
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+import java.io.File
 import java.time.Duration
 import java.time.ZonedDateTime
-import java.util.Calendar
+import java.util.*
 import kotlin.math.abs
 
 
@@ -437,6 +438,7 @@ class WatchFace3CanvasRenderer(
     ) {
         //绘制当前的背景，但是之后需要和相册表盘结合在一起
         //TODO
+
         val drawAmbient = renderParameters.drawMode == DrawMode.AMBIENT
         if (!drawAmbient){
             val bg = BitmapFactory.decodeResource(context.resources,BitmapTranslateUtils.currentBg(watchFaceData.shapeStyle.shapeType))
@@ -446,13 +448,29 @@ class WatchFace3CanvasRenderer(
             val bg = BitmapFactory.decodeResource(context.resources,R.drawable.bg)
             canvas.drawBitmap(bg,0f,0f,clockPaint)
         }
-
+        if (FinalStatic.setPicture == 0){
+            getPicture(canvas,bounds)
+            FinalStatic.setPicture = 1
+        }
         drawTime(canvas,bounds,zonedDateTime)
     }
 
 
 
-    //绘制当前的背景和时间
+    //获取当前目录下的图片
+    private fun getPicture(canvas: Canvas,bounds: Rect) {
+        val filepath = "/storage/emulated/0/Pictures/watchface" + File.separator + "a.png"
+        val file = File(filepath)
+        if (file.exists()) {
+            val bm = BitmapFactory.decodeFile(filepath)
+            Log.d("wjjjjjjjjjjjj", "getPicture: " + bm)
+            canvas.drawBitmap(bm, null, bounds, clockPaint)
+
+        }
+    }
+
+
+    //绘制当前的背景和时
     private fun drawTime(canvas: Canvas, bounds: Rect, zonedDateTime: ZonedDateTime){
         val drawAmbient = renderParameters.drawMode == DrawMode.AMBIENT
         //style1 样式正确

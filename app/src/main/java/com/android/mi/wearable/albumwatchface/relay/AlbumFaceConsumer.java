@@ -1,9 +1,17 @@
 package com.android.mi.wearable.albumwatchface.relay;
 
+import static com.xiaomi.wear.protobuf.nano.CommonProtos.NO_ERROR;
 import static com.xiaomi.wear.protobuf.nano.WatchFaceProtos.EditResponse.SUCCESS;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.ImageDecoder;
+import android.media.MediaDrm;
+import android.os.Build;
+import android.os.Bundle;
 import android.util.Log;
+
+import androidx.annotation.RequiresApi;
 
 import com.android.mi.wearable.albumwatchface.utils.Constants;
 import com.google.protobuf.nano.InvalidProtocolBufferNanoException;
@@ -13,8 +21,10 @@ import com.xiaomi.wear.protobuf.nano.WearProtos;
 import com.xiaomi.wear.transmit.TransmitConsumer;
 import com.xiaomi.wear.transmit.TransmitManager;
 
+import java.io.IOException;
+
 public class AlbumFaceConsumer implements TransmitConsumer {
-    private static final String TAG = "wnjjjj";
+    private static final String TAG = AlbumFaceConsumer.class.getName();
     private Context mContext;
     private static WearProtos.WearPacket request = new WearProtos.WearPacket();
     private static WearProtos.WearPacket mResponse = new WearProtos.WearPacket();
@@ -35,35 +45,38 @@ public class AlbumFaceConsumer implements TransmitConsumer {
     @Override
     public void onMessageReceived(String path, byte[] data) throws InvalidProtocolBufferNanoException {
         TransmitConsumer.super.onMessageReceived(path, data);
+        Log.d(TAG, "data: "+data);
+        if (data == null){
+            return;
+        }
         WearProtos.WearPacket request = WearProtos.WearPacket.parseFrom(data);
-        Log.d(TAG, "onMessageReceived: ");
-        Log.d(TAG, "onMessageReceived: "+path+data);
         mResponse.id = request.id;
         mResponse.type = request.type;
-        Log.d(TAG, "onMessageReceived: "+request.id);
-        Log.d(TAG, "onMessageReceived: "+mResponse.id);
-
+        Log.d(TAG, "request: "+request);
+        Log.d(TAG, "request.id: "+request.id);
+        Log.d(TAG, "mResponse.id: "+mResponse.id);
         // 编辑表盘，信息在editRequest
-        if (WatchFaceProtos.WatchFace.EDIT_WATCH_FACE == request.id){
-            Log.d(TAG, "onMessageReceived: EDIT_WATCH_FACE");
-            WatchFaceProtos.EditRequest editRequest = request.getWatchFace().getEditRequest();
-            Log.d(TAG, "onMessageReceived: "+editRequest.backgroundImageSize);
-            /*editRequest.backgroundColor*/ //背景颜色
-            /*editRequest.backgroundImage*/ //背景图片
-            /*editRequest.style*/ //样式
-            Log.d(TAG, "onMessageReceived: "+editRequest.backgroundImage);
+        if (WatchFaceProtos.WatchFace.REMOVE_WATCH_FACE_PHOTO == request.id){
+            Log.d(TAG, "getWatchFace: "+request.getWatchFace());
+//            WatchFaceProtos.EditRequest editRequest = request.getWatchFace().getEditRequest();
+//           // Log.d(TAG, "onMessageReceived: "+editRequest.backgroundImageSize);
+//            /*editRequest.backgroundColor*/ //背景颜色
+//            /*editRequest.backgroundImage*/ //背景图片
+//            /*editRequest.style*/ //样式
+//            Log.d(TAG, "editRequest: "+editRequest);
+            mResponse.setErrorCode(NO_ERROR);
+            Log.d(TAG, "mResponse.getWatchFace(): "+mResponse.getWatchFace());;
+            TransmitManager.getInstance().sendMessage(Constants.WATCH_FACE_PATH, MessageNano.toByteArray(mResponse), (int val, Bundle bundle) -> {
+                Log.d(TAG, "onMessageReceived: "+bundle);
+            });
+
+            //sendEditResponseToPhone();
             // todo 背景替换、添加或者删除图片、表盘样式修改
-//            //颜色替换 获取当前的rgb
-//            editRequest.backgroundColor =
-//            //背景替换
-//            editRequest.backgroundImage =
-//            //样式替换也就是位置替换
-//            editRequest.style =
 
 
 
-
-
+        }else{
+            Log.d(TAG, "当前是其他的指令" );
         }
 
         if (WatchFaceProtos.WatchFace.BG_IMAGE_RESULT == request.id){
@@ -74,7 +87,7 @@ public class AlbumFaceConsumer implements TransmitConsumer {
     /*****  表盘协议说明文档：https://xiaomi.f.mioffice.cn/docs/dock4llfip5xxNpu5qp01QSrzh0#votigB  ****/
     /**
      * 发送编辑结果信息给手机
-    * */
+     * */
     public synchronized void sendEditResponseToPhone(){
         WatchFaceProtos.WatchFace watchFace = new WatchFaceProtos.WatchFace();
         WatchFaceProtos.EditResponse response = new WatchFaceProtos.EditResponse();
@@ -82,10 +95,9 @@ public class AlbumFaceConsumer implements TransmitConsumer {
         response.code = SUCCESS /*成功*/; /*SUCCESS_BUT_LOW_STORAGE 成功但是存储不足;FAIL_BUT_LOW_STORAGE 失败存储不足;FAIL失败*/
         response.canAcceptImageCount = 2; //SUCCESS_BUT_LOW_STORAGE才需要该参数
         response.expectedSliceLength = 4096; // needed if EditRequest contains image
-
         watchFace.setEditResponse(response);
-        mResponse.setWatchFace(watchFace);
         TransmitManager.getInstance().sendMessage(Constants.WATCH_FACE_PATH, MessageNano.toByteArray(mResponse),null);
+        Log.d(TAG, "sendEditResponseToPhone: ");
     }
 
     /**
@@ -99,10 +111,11 @@ public class AlbumFaceConsumer implements TransmitConsumer {
         bgImageResult.code = WatchFaceProtos.BgImageResult.SUCCESS;/*IMAGE_SAVE_FAILED;IMAGE_RESOLVE_FAILED*/
         bgImageResult.id = String.valueOf(2); //if success, id is neccessary
         bgImageResult.backgroundImage = String.valueOf(3); // image id: md5
-
         response.id = WatchFaceProtos.WatchFace.BG_IMAGE_RESULT;
         watchFace.setBgImageResult(bgImageResult);
         response.setWatchFace(watchFace);
         TransmitManager.getInstance().sendMessage(Constants.WATCH_FACE_PATH, MessageNano.toByteArray(response),null);
     }
+
+
 }

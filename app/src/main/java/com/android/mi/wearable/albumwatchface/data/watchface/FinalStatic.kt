@@ -13,6 +13,9 @@ class FinalStatic {
         @JvmStatic
         var currentPositionPosition = 0
 
+        @JvmStatic
+        var setPicture = 0
+
     }
 
 
