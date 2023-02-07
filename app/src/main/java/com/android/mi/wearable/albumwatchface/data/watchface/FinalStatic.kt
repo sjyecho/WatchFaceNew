@@ -16,6 +16,9 @@ class FinalStatic {
         @JvmStatic
         var setPicture = 0
 
+        @JvmStatic
+        var setPictureDefault = 0
+
     }
 
 

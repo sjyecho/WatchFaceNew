@@ -13,6 +13,7 @@ import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
+import com.android.mi.wearable.albumwatchface.data.watchface.FinalStatic;
 import com.android.mi.wearable.albumwatchface.utils.Constants;
 import com.google.protobuf.nano.InvalidProtocolBufferNanoException;
 import com.google.protobuf.nano.MessageNano;

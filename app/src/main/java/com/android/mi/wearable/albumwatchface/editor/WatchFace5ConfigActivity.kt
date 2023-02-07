@@ -1,5 +1,6 @@
 package com.android.mi.wearable.albumwatchface.editor
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -13,6 +14,7 @@ import com.android.mi.wearable.albumwatchface.utils.TOP_COMPLICATION_ID_1
 import com.android.mi.wearable.albumwatchface.utils.BOTTOM_COMPLICATION_ID_1
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.io.File
 
 interface IComplicationClick {
     fun onStylePagerChange(isUp: Boolean)
@@ -227,6 +229,8 @@ class WatchFace5ConfigActivity : ComponentActivity(), IComplicationClick {
     fun onConfirmClick(view: View) {
         isSelected = true
         onBackPressedDispatcher.onBackPressed()
+
+
     }
 
     private fun updateWatchFacePreview(
