@@ -16,6 +16,8 @@
 package com.android.mi.wearable.albumwatchface.data.watchface
 
 import android.content.Context
+import android.graphics.BitmapFactory
+import android.graphics.drawable.Icon
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.wear.watchface.style.UserStyleSetting
@@ -63,53 +65,65 @@ enum class ShapeStyleIdAndResourceIds(
     val id: String,
     @StringRes val nameResourceId: Int,
     @DrawableRes val shapeType: Int,
+    @DrawableRes val appIcon : Int
 ) {
     STY1(
         id = ONE_STYLE_ID,
         nameResourceId = ONE_STYLE_NAME_RESOURCE_ID,
         shapeType = STYLE1,
+        appIcon = R.drawable.w1
+
     ),
 
     STY2(
         id = TWO_STYLE_ID,
         nameResourceId = TWO_STYLE_NAME_RESOURCE_ID,
         shapeType = STYLE2,
+        appIcon = R.drawable.w2
     ),
 
     STY3(
         id = THREE_STYLE_ID,
         nameResourceId = THREE_STYLE_NAME_RESOURCE_ID,
         shapeType = STYLE3,
+        appIcon = R.drawable.w3
     ),
     STY4(
-    id = FOUR_STYLE_ID,
-    nameResourceId = FOUR_STYLE_NAME_RESOURCE_ID,
-    shapeType = STYLE4,
+        id = FOUR_STYLE_ID,
+        nameResourceId = FOUR_STYLE_NAME_RESOURCE_ID,
+        shapeType = STYLE4,
+        appIcon = R.drawable.w4
     ),
     STY5(
         id = FIVE_STYLE_ID,
         nameResourceId = FIVE_STYLE_NAME_RESOURCE_ID,
         shapeType = STYLE5,
+        appIcon = R.drawable.w5
     ),
     STY6(
         id = SIX_STYLE_ID,
         nameResourceId = SIX_STYLE_NAME_RESOURCE_ID,
         shapeType = STYLE6,
+        appIcon = R.drawable.w6
+
     ),
     STY7(
         id = SEVEN_STYLE_ID,
         nameResourceId = SEVEN_STYLE_NAME_RESOURCE_ID,
         shapeType = STYLE7,
+        appIcon = R.drawable.w7
     ),
     STY8(
         id = EIGHT_STYLE_ID,
         nameResourceId = EIGHT_STYLE_NAME_RESOURCE_ID,
         shapeType = STYLE8,
+        appIcon = R.drawable.w8
     ),
     STY9(
         id = NINE_STYLE_ID,
         nameResourceId = NINE_STYLE_NAME_RESOURCE_ID,
         shapeType = STYLE9,
+        appIcon = R.drawable.w9
     );
 
     companion object {
@@ -139,13 +153,20 @@ enum class ShapeStyleIdAndResourceIds(
         fun toOptionList(context: Context): List<ListUserStyleSetting.ListOption> {
             val shapeStyleIdAndResourceIdsList = enumValues<ShapeStyleIdAndResourceIds>()
             return shapeStyleIdAndResourceIdsList.map { shapeStyleIdAndResourceIds ->
+                val options = BitmapFactory.Options()
+                options.inJustDecodeBounds = true
+                BitmapFactory.decodeResource(context.resources,shapeStyleIdAndResourceIds.appIcon,options)
+                options.inSampleSize = 2
+                options.inJustDecodeBounds = false
+                val iconBitmap = BitmapFactory.decodeResource(context.resources,shapeStyleIdAndResourceIds.appIcon,options)
                 ListUserStyleSetting.ListOption(
                     UserStyleSetting.Option.Id(shapeStyleIdAndResourceIds.id),
                     context.resources,
                     shapeStyleIdAndResourceIds.nameResourceId,
-                    null
+                    Icon.createWithBitmap(iconBitmap)
                 )
             }
         }
+        }
     }
-}
+

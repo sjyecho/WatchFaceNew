@@ -19,6 +19,10 @@ class FinalStatic {
         @JvmStatic
         var setPictureDefault = 0
 
+        //当前表盘显示的背景index
+        @JvmStatic
+        var pictureIndex = 0
+
     }
 
 

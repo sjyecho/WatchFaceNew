@@ -1,16 +1,22 @@
 package com.android.mi.wearable.albumwatchface
 
+import android.util.Log
 import android.view.SurfaceHolder
 import androidx.wear.watchface.*
 import androidx.wear.watchface.style.CurrentUserStyleRepository
 import androidx.wear.watchface.style.UserStyleSchema
+import com.android.mi.wearable.albumwatchface.data.watchface.FinalStatic
 import com.android.mi.wearable.albumwatchface.utils.createComplicationSlotManager
 import com.android.mi.wearable.albumwatchface.utils.createUserStyleSchema
 
-class WatchFaceService5 : WatchFaceService(){
+class WatchFaceService5 : WatchFaceService(), WatchFace.TapListener {
 
+    private var i = 1
 
-    override fun createUserStyleSchema(): UserStyleSchema = createUserStyleSchema(context = applicationContext)
+    private lateinit var mRender: WatchFace3CanvasRenderer
+
+    override fun createUserStyleSchema(): UserStyleSchema =
+        createUserStyleSchema(context = applicationContext)
 
     override fun createComplicationSlotsManager(currentUserStyleRepository: CurrentUserStyleRepository): ComplicationSlotsManager {
         return createComplicationSlotManager(
@@ -19,8 +25,6 @@ class WatchFaceService5 : WatchFaceService(){
         )
     }
 
-
-
     override suspend fun createWatchFace(
         surfaceHolder: SurfaceHolder,
         watchState: WatchState,
@@ -28,7 +32,7 @@ class WatchFaceService5 : WatchFaceService(){
         currentUserStyleRepository: CurrentUserStyleRepository
     ): WatchFace {
         // Creates class that renders the watch face.
-        val renderer = WatchFace3CanvasRenderer(
+        mRender = WatchFace3CanvasRenderer(
             context = applicationContext,
             surfaceHolder = surfaceHolder,
             watchState = watchState,
@@ -38,14 +42,26 @@ class WatchFaceService5 : WatchFaceService(){
         )
 
         //Creates the watch face
-        return WatchFace(
+        val watchface = WatchFace(
             watchFaceType = WatchFaceType.ANALOG,
-            renderer = renderer
+            renderer = mRender
         )
+        watchface.setTapListener(this)
+        return watchface
     }
 
-//    override fun onTapEvent(tapType: Int, tapEvent: TapEvent, complicationSlot: ComplicationSlot?) {
-//
-//    }
+    override fun onTapEvent(tapType: Int, tapEvent: TapEvent, complicationSlot: ComplicationSlot?) {
 
+        if (complicationSlot == null){
+            if (i % 2 == 0) {
+                mRender.changeImageValue()
+                mRender.postInvalidate()
+            }
+            i++
+        }else{
+            Log.d("WatchFaceService5", "onTapEvent: else")
+        }
+
+
+    }
 }

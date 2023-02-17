@@ -16,6 +16,8 @@
 package com.android.mi.wearable.albumwatchface.data.watchface
 
 import android.content.Context
+import android.graphics.BitmapFactory
+import android.graphics.drawable.Icon
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.wear.watchface.style.UserStyleSetting
@@ -149,258 +151,296 @@ enum class ColorStyleIdAndResourceIds(
     val id: String,
     @StringRes val nameResourceId: Int,
     @DrawableRes val watchFaceStyle: Int,
-     val colorInt: Int
+     val colorInt: Int,
+    @DrawableRes val colorIcon: Int
 ) {
     COLOR1(
         id = COLOR_STYLE1_ID,
         nameResourceId = COLOR_STYLE1_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_1,
-        colorInt = R.color.color1
+        colorInt = R.color.color1,
+        colorIcon = R.drawable.c1
     ),
 
     COLOR2(
         id = COLOR_STYLE2_ID,
         nameResourceId = COLOR_STYLE2_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_2,
-        colorInt = R.color.color2
+        colorInt = R.color.color2,
+        colorIcon = R.drawable.c2
     ),
 
     COLOR3(
         id = COLOR_STYLE3_ID,
         nameResourceId = COLOR_STYLE3_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_3,
-        colorInt = R.color.color3
+        colorInt = R.color.color3,
+        colorIcon = R.drawable.c3
     ),
 
     COLOR4(
         id = COLOR_STYLE4_ID,
         nameResourceId = COLOR_STYLE4_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_4,
-        colorInt = R.color.color4
+        colorInt = R.color.color4,
+        colorIcon = R.drawable.c4
     ),
 
     COLOR5(
         id = COLOR_STYLE5_ID,
         nameResourceId = COLOR_STYLE5_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_5,
-        colorInt = R.color.color5
+        colorInt = R.color.color5,
+        colorIcon = R.drawable.c5
     ),
 
     COLOR6(
         id = COLOR_STYLE6_ID,
         nameResourceId = COLOR_STYLE6_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_6,
-        colorInt = R.color.color6
+        colorInt = R.color.color6,
+        colorIcon = R.drawable.c6
     ),
 
     COLOR7(
         id = COLOR_STYLE7_ID,
         nameResourceId = COLOR_STYLE7_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_7,
-        colorInt = R.color.color7
+        colorInt = R.color.color7,
+        colorIcon = R.drawable.c7
     ),
 
     COLOR8(
         id = COLOR_STYLE8_ID,
         nameResourceId = COLOR_STYLE8_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_8,
-        colorInt = R.color.color8
+        colorInt = R.color.color8,
+        colorIcon = R.drawable.c8
     ),
 
     COLOR9(
         id = COLOR_STYLE9_ID,
         nameResourceId = COLOR_STYLE9_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_9,
-        colorInt = R.color.color9
+        colorInt = R.color.color9,
+        colorIcon = R.drawable.c9
     ),
 
     COLOR10(
         id = COLOR_STYLE10_ID,
         nameResourceId = COLOR_STYLE10_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_10,
-        colorInt = R.color.color10
+        colorInt = R.color.color10,
+        colorIcon = R.drawable.c10
     ),
 
     COLOR11(
         id = COLOR_STYLE11_ID,
         nameResourceId = COLOR_STYLE11_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_11,
-        colorInt = R.color.color11
+        colorInt = R.color.color11,
+        colorIcon = R.drawable.c11
     ),
 
     COLOR12(
         id = COLOR_STYLE12_ID,
         nameResourceId = COLOR_STYLE12_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_12,
-        colorInt = R.color.color12
+        colorInt = R.color.color12,
+        colorIcon = R.drawable.c12
     ),
 
     COLOR13(
         id = COLOR_STYLE13_ID,
         nameResourceId = COLOR_STYLE13_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_13,
-        colorInt = R.color.color13
+        colorInt = R.color.color13,
+        colorIcon = R.drawable.c13
     ),
 
     COLOR14(
         id = COLOR_STYLE14_ID,
         nameResourceId = COLOR_STYLE14_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_14,
-        colorInt = R.color.color14
+        colorInt = R.color.color14,
+        colorIcon = R.drawable.c14
     ),
 
     COLOR15(
         id = COLOR_STYLE15_ID,
         nameResourceId = COLOR_STYLE15_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_15,
-        colorInt = R.color.color15
+        colorInt = R.color.color15,
+        colorIcon = R.drawable.c15
     ),
 
     COLOR16(
         id = COLOR_STYLE16_ID,
         nameResourceId = COLOR_STYLE16_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_16,
-        colorInt = R.color.color16
+        colorInt = R.color.color16,
+        colorIcon = R.drawable.c16
     ),
 
     COLOR17(
         id = COLOR_STYLE17_ID,
         nameResourceId = COLOR_STYLE17_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_17,
-        colorInt = R.color.color17
+        colorInt = R.color.color17,
+        colorIcon = R.drawable.c17
     ),
 
     COLOR18(
         id = COLOR_STYLE18_ID,
         nameResourceId = COLOR_STYLE18_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_18,
-        colorInt = R.color.color18
+        colorInt = R.color.color18,
+        colorIcon = R.drawable.c18
     ),
 
     COLOR19(
         id = COLOR_STYLE19_ID,
         nameResourceId = COLOR_STYLE19_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_19,
-        colorInt = R.color.color19
+        colorInt = R.color.color19,
+        colorIcon = R.drawable.c19
     ),
 
     COLOR20(
         id = COLOR_STYLE20_ID,
         nameResourceId = COLOR_STYLE20_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_20,
-        colorInt = R.color.color20
+        colorInt = R.color.color20,
+        colorIcon = R.drawable.c20
     ),
 
     COLOR21(
         id = COLOR_STYLE21_ID,
         nameResourceId = COLOR_STYLE21_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_21,
-        colorInt = R.color.color21
+        colorInt = R.color.color21,
+        colorIcon = R.drawable.c21
     ),
 
     COLOR22(
         id = COLOR_STYLE22_ID,
         nameResourceId = COLOR_STYLE22_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_22,
-        colorInt = R.color.color22
+        colorInt = R.color.color22,
+        colorIcon = R.drawable.c22
     ),
 
     COLOR23(
         id = COLOR_STYLE23_ID,
         nameResourceId = COLOR_STYLE23_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_23,
-        colorInt = R.color.color23
+        colorInt = R.color.color23,
+        colorIcon = R.drawable.c23
     ),
 
     COLOR24(
         id = COLOR_STYLE24_ID,
         nameResourceId = COLOR_STYLE24_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_24,
-        colorInt = R.color.color24
+        colorInt = R.color.color24,
+        colorIcon = R.drawable.c24
     ),
 
     COLOR25(
         id = COLOR_STYLE25_ID,
         nameResourceId = COLOR_STYLE25_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_25,
-        colorInt = R.color.color25
+        colorInt = R.color.color25,
+        colorIcon = R.drawable.c25
     ),
 
     COLOR26(
         id = COLOR_STYLE26_ID,
         nameResourceId = COLOR_STYLE26_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_26,
-        colorInt = R.color.color26
+        colorInt = R.color.color26,
+        colorIcon = R.drawable.c26
     ),
 
     COLOR27(
         id = COLOR_STYLE27_ID,
         nameResourceId = COLOR_STYLE27_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_27,
-        colorInt = R.color.color27
+        colorInt = R.color.color27,
+        colorIcon = R.drawable.c27
     ),
 
     COLOR28(
         id = COLOR_STYLE28_ID,
         nameResourceId = COLOR_STYLE28_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_28,
-        colorInt = R.color.color28
+        colorInt = R.color.color28,
+        colorIcon = R.drawable.c28
     ),
 
     COLOR29(
         id = COLOR_STYLE29_ID,
         nameResourceId = COLOR_STYLE29_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_29,
-        colorInt = R.color.color29
+        colorInt = R.color.color29,
+        colorIcon = R.drawable.c29
     ),
 
     COLOR30(
         id = COLOR_STYLE30_ID,
         nameResourceId = COLOR_STYLE30_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_30,
-        colorInt = R.color.color30
+        colorInt = R.color.color30,
+        colorIcon = R.drawable.c30
     ),
 
     COLOR31(
         id = COLOR_STYLE31_ID,
         nameResourceId = COLOR_STYLE31_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_31,
-        colorInt = R.color.color31
+        colorInt = R.color.color31,
+        colorIcon = R.drawable.c31
     ),
 
     COLOR32(
         id = COLOR_STYLE32_ID,
         nameResourceId = COLOR_STYLE32_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_32,
-        colorInt = R.color.color32
+        colorInt = R.color.color32,
+        colorIcon = R.drawable.c32
     ),
 
     COLOR33(
         id = COLOR_STYLE33_ID,
         nameResourceId = COLOR_STYLE33_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_33,
-        colorInt = R.color.color33
+        colorInt = R.color.color33,
+        colorIcon = R.drawable.c33
     ),
 
     COLOR34(
         id = COLOR_STYLE34_ID,
         nameResourceId = COLOR_STYLE34_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_34,
-        colorInt = R.color.color34
+        colorInt = R.color.color34,
+        colorIcon = R.drawable.c34
+
     ),
 
     COLOR35(
         id = COLOR_STYLE35_ID,
         nameResourceId = COLOR_STYLE35_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_35,
-        colorInt = R.color.color35
+        colorInt = R.color.color35,
+        colorIcon = R.drawable.c35
     ),
 
     COLOR36(
         id = COLOR_STYLE36_ID,
         nameResourceId = COLOR_STYLE36_NAME_RESOURCE_ID,
         watchFaceStyle = TYPE_36,
-        colorInt = R.color.color36
+        colorInt = R.color.color36,
+        colorIcon = R.drawable.c36
     );
 
 
@@ -457,14 +497,22 @@ enum class ColorStyleIdAndResourceIds(
          */
         fun toOptionList(context: Context): List<ListUserStyleSetting.ListOption> {
             val colorStyleIdAndResourceIdsList = enumValues<ColorStyleIdAndResourceIds>()
-            return colorStyleIdAndResourceIdsList.map { colorStyleIdAndResourceIds ->
+            return colorStyleIdAndResourceIdsList.map { shapeStyleIdAndResourceIds ->
+                val options = BitmapFactory.Options()
+                options.inJustDecodeBounds = true
+                BitmapFactory.decodeResource(context.resources,shapeStyleIdAndResourceIds.colorIcon,options)
+                options.inSampleSize = 2
+                options.inJustDecodeBounds = false
+                val iconBitmap = BitmapFactory.decodeResource(context.resources,shapeStyleIdAndResourceIds.colorIcon,options)
                 ListUserStyleSetting.ListOption(
-                    UserStyleSetting.Option.Id(colorStyleIdAndResourceIds.id),
+                    UserStyleSetting.Option.Id(shapeStyleIdAndResourceIds.id),
                     context.resources,
-                    colorStyleIdAndResourceIds.nameResourceId,
-                    null
+                    shapeStyleIdAndResourceIds.nameResourceId,
+                    Icon.createWithBitmap(iconBitmap)
                 )
             }
         }
     }
 }
+
+

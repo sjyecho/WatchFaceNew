@@ -1,25 +1,27 @@
 package com.android.mi.wearable.albumwatchface.utils
+
 import com.android.mi.wearable.albumwatchface.R
 import com.android.mi.wearable.albumwatchface.data.watchface.*
-import com.android.mi.wearable.albumwatchface.relay.AlbumFaceConsumer
+import java.io.File
 import java.util.*
+import kotlin.collections.ArrayList
 
 object BitmapTranslateUtils {
     //当前position
-    fun currentPositionItemPosition(id: String): Int{
-        return when(id){
+    fun currentPositionItemPosition(id: String): Int {
+        return when (id) {
             PositionStyle.TOP.id -> 0
-            PositionStyle.BOTTOM.id ->1
-            PositionStyle.LEFT.id ->2
-            PositionStyle.RIGHT.id ->3
-            else ->-1
+            PositionStyle.BOTTOM.id -> 1
+            PositionStyle.LEFT.id -> 2
+            PositionStyle.RIGHT.id -> 3
+            else -> -1
         }
     }
 
 
     //当前style的位置
     fun currentShapeItemPosition(id: String): Int {
-        return when(id){
+        return when (id) {
             ShapeStyleIdAndResourceIds.STY1.id -> 0
             ShapeStyleIdAndResourceIds.STY2.id -> 1
             ShapeStyleIdAndResourceIds.STY3.id -> 2
@@ -34,8 +36,8 @@ object BitmapTranslateUtils {
     }
 
     //下一个style的位置
-    fun nextResId(currentId: String): String{
-        return when (currentId){
+    fun nextResId(currentId: String): String {
+        return when (currentId) {
             ShapeStyleIdAndResourceIds.STY1.id -> ShapeStyleIdAndResourceIds.STY2.id
             ShapeStyleIdAndResourceIds.STY2.id -> ShapeStyleIdAndResourceIds.STY3.id
             ShapeStyleIdAndResourceIds.STY3.id -> ShapeStyleIdAndResourceIds.STY4.id
@@ -49,10 +51,44 @@ object BitmapTranslateUtils {
         }
     }
 
+    //获取当前文件夹下的所有png文件
+    fun getPictureList(pngPath: String, fileList: ArrayList<String>): ArrayList<String> {
+        //初始化当前的文件列表
+        val file = File(pngPath)
+        val tempList = file.listFiles()
+        for (i in tempList.indices) {
+            if (tempList[i].isFile) {
+                val fileName = tempList[i].name
+                if (fileName.endsWith(".png") && !fileList.contains(fileName)) {
+                    fileList.add(fileName)
+                }
+            }
+        }
+        return fileList
+    }
+
+    fun getDeletePictureList(): ArrayList<String> {
+        val pngPath = "/storage/emulated/0/Pictures/watchface"
+        var fileList = ArrayList<String>()
+        //初始化当前的文件列表
+        val file = File(pngPath)
+        val tempList = file.listFiles()
+        for (i in tempList.indices) {
+            if (tempList[i].isFile) {
+                val fileName = tempList[i].name
+                if (fileName.endsWith(".png") && !fileList.contains(fileName)) {
+                    fileList.add(fileName)
+                }
+            }
+        }
+        return fileList
+    }
+
+
     //当前默认的相册表盘的背景
-    fun currentBg(styleType: Int): Int{
+    fun currentBg(styleType: Int): Int {
         when (styleType) {
-            STYLE1-> {
+            STYLE1 -> {
                 return R.drawable.style1_bg
             }
             STYLE2 -> {
@@ -70,7 +106,7 @@ object BitmapTranslateUtils {
             STYLE6 -> {
                 return R.drawable.style_6_bg
             }
-            STYLE7 ->{
+            STYLE7 -> {
                 return R.drawable.style_bg_7
             }
             STYLE8 -> {
@@ -86,16 +122,16 @@ object BitmapTranslateUtils {
 
 
     //相册表盘当前的时间
-    fun currentTime() : String{
+    fun currentTime(): String {
         //获取当前的小时
         val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
         //存放当前的时间
         var time = Calendar.getInstance().get(Calendar.HOUR_OF_DAY).toString()
         //判断当前的小时是否是<10
-        if (hour<10){
+        if (hour < 10) {
             val currentHour = "0$hour"
             time = currentHour
-        }else{
+        } else {
             val currentHour = hour.toString()
             time = currentHour
         }
@@ -103,7 +139,7 @@ object BitmapTranslateUtils {
         //获取当前的分钟
         val minute = Calendar.getInstance().get(Calendar.MINUTE)
         time += when {
-            minute<10 -> {
+            minute < 10 -> {
                 val currentMinute = "0$minute"
                 currentMinute
             }
@@ -116,50 +152,50 @@ object BitmapTranslateUtils {
     }
 
     //样式九的星期
-    fun currentWeek8(): Array<String>{
-        val weekArray = arrayOf("0","0","0")
-        when(Calendar.getInstance().get(Calendar.DAY_OF_WEEK)){
+    fun currentWeek8(): Array<String> {
+        val weekArray = arrayOf("0", "0", "0")
+        when (Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
             2 -> {
                 weekArray[0] = "M"
                 weekArray[1] = "O"
                 weekArray[2] = "N"
-                return  weekArray
+                return weekArray
             }
             3 -> {
                 weekArray[0] = "T"
                 weekArray[1] = "U"
                 weekArray[2] = "E"
-                return  weekArray
+                return weekArray
             }
             4 -> {
                 weekArray[0] = "W"
                 weekArray[1] = "E"
                 weekArray[2] = "D"
-                return  weekArray
+                return weekArray
             }
             5 -> {
                 weekArray[0] = "T"
                 weekArray[1] = "H"
                 weekArray[2] = "U"
-                return  weekArray
+                return weekArray
             }
             6 -> {
                 weekArray[0] = "F"
                 weekArray[1] = "R"
                 weekArray[2] = "I"
-                return  weekArray
+                return weekArray
             }
             7 -> {
                 weekArray[0] = "S"
                 weekArray[1] = "A"
                 weekArray[2] = "T"
-                return  weekArray
+                return weekArray
             }
             else -> {
                 weekArray[0] = "S"
                 weekArray[1] = "U"
                 weekArray[2] = "N"
-                return  weekArray
+                return weekArray
             }
 
         }
@@ -167,8 +203,8 @@ object BitmapTranslateUtils {
 
 
     //获取当前的TUE
-    fun currentWeekdayNotAll() : String{
-        when (Calendar.getInstance().get(Calendar.DAY_OF_WEEK)){
+    fun currentWeekdayNotAll(): String {
+        when (Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
             2 -> {
                 return "MON"
             }
@@ -197,7 +233,7 @@ object BitmapTranslateUtils {
 
 
     //获取当前的TUESDAY
-    fun currentWeekdayAll() : String{
+    fun currentWeekdayAll(): String {
         when (Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
             2 -> {
                 return "MONDAY"
@@ -224,33 +260,33 @@ object BitmapTranslateUtils {
     }
 
     //获取当前的TUESDAY
-    fun currentWeekday(weekday: Int) : Array<String>{
+    fun currentWeekday(weekday: Int): Array<String> {
         when ((weekday)) {
             2 -> {
-                return arrayOf("M","o","n","d","a","y")
+                return arrayOf("M", "o", "n", "d", "a", "y")
             }
             3 -> {
-                return arrayOf("T","u","e","s","d","a","y")
+                return arrayOf("T", "u", "e", "s", "d", "a", "y")
             }
             4 -> {
-                return arrayOf("W","e","d","n","e","s","d","a","y")
+                return arrayOf("W", "e", "d", "n", "e", "s", "d", "a", "y")
             }
             5 -> {
-                return arrayOf("T","h","u","r","s","d","a","y")
+                return arrayOf("T", "h", "u", "r", "s", "d", "a", "y")
             }
             6 -> {
-                return arrayOf("F","r","i","d","a","y")
+                return arrayOf("F", "r", "i", "d", "a", "y")
             }
             7 -> {
-                return arrayOf("S","a","t","u","r","d","a","y")
+                return arrayOf("S", "a", "t", "u", "r", "d", "a", "y")
             }
             else -> {
-                return arrayOf("S","u","n","d","a","y")
+                return arrayOf("S", "u", "n", "d", "a", "y")
             }
         }
     }
 
-    fun currentWeekdayAll7() : String{
+    fun currentWeekdayAll7(): String {
         val weekday = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
         when ((weekday)) {
             2 -> {
@@ -278,182 +314,186 @@ object BitmapTranslateUtils {
     }
 
 
-//方案七的时间样式
+    //方案七的时间样式
 //用数组存当前的每个数字
-fun currentTime17(): Array<String>{
-    //先定义一个数组
-    val timeArray = arrayOf("0", "0", ":", "0", "0")
-    //获取当前的小时
-    val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
-    //获取当前的小时
-    if (hour<10){
-        timeArray[0] = "0"
-        timeArray[1] = hour.toString()
-    }else{
-        //获取当前的小时十位
-        val hourTen = hour/10%10
-        val hourBit = hour%10
-        timeArray[0] = hourTen.toString()
-        timeArray[1] = hourBit.toString()
-    }
-    //获取当前的分钟
-    val minute = Calendar.getInstance().get(Calendar.MINUTE)
-    if (minute<10){
-        timeArray[3] = "0"
-        timeArray[4] = minute.toString()
-    }else{
-        val minuteTen = minute / 10 %10
-        val minuteBit = minute % 10
-        timeArray[3] = minuteTen.toString()
-        timeArray[4] = minuteBit.toString()
-    }
-    return timeArray
+    fun currentTime17(): Array<String> {
+        //先定义一个数组
+        val timeArray = arrayOf("0", "0", ":", "0", "0")
+        //获取当前的小时
+        val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+        //获取当前的小时
+        if (hour < 10) {
+            timeArray[0] = "0"
+            timeArray[1] = hour.toString()
+        } else {
+            //获取当前的小时十位
+            val hourTen = hour / 10 % 10
+            val hourBit = hour % 10
+            timeArray[0] = hourTen.toString()
+            timeArray[1] = hourBit.toString()
+        }
+        //获取当前的分钟
+        val minute = Calendar.getInstance().get(Calendar.MINUTE)
+        if (minute < 10) {
+            timeArray[3] = "0"
+            timeArray[4] = minute.toString()
+        } else {
+            val minuteTen = minute / 10 % 10
+            val minuteBit = minute % 10
+            timeArray[3] = minuteTen.toString()
+            timeArray[4] = minuteBit.toString()
+        }
+        return timeArray
 
-}
+    }
+
     //获取当前样式4的月份和/
     //获取当前的日期08
-    fun currentMonth4(): String{
+    fun currentMonth4(): String {
         //先定义一个数组
         val dataArray = arrayOf("0", "0", "/")
         //获取当前的小时
-        val month = Calendar.getInstance().get(Calendar.MONTH)
+        val month = Calendar.getInstance().get(Calendar.MONTH)+1
         //获取当前的小时
-        if (month<10){
+        // TODO 月份显示问题
+        if (month < 10) {
             dataArray[0] = "0"
-            if (month == 0){
+            if (month == 0) {
                 dataArray[1] = "1"
-            }else{
+            } else {
                 dataArray[1] = month.toString()
             }
-        }else{
+        } else {
             //获取当前的小时十位
-            val monthTen = month/10%10
-            val monthBit = month%10
+            val monthTen = month / 10 % 10
+            val monthBit = month % 10
             dataArray[0] = monthTen.toString()
             dataArray[1] = monthBit.toString()
         }
-        return dataArray[0]+dataArray[1]+dataArray[2]
+        return dataArray[0] + dataArray[1] + dataArray[2]
     }
 
     //获取当前样式4的月份和/
     //获取当前的日期16
-    fun currentDay4(): String{
+    fun currentDay4(): String {
         //先定义一个数组
         val dataArray = arrayOf("0", "0")
         //获取当前的day
         val day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
-        if (day<10){
+        if (day < 10) {
             dataArray[0] = "0"
             dataArray[1] = day.toString()
-        }else{
-            val dayTen = day / 10 %10
+        } else {
+            val dayTen = day / 10 % 10
             val dayBit = day % 10
             dataArray[0] = dayTen.toString()
             dataArray[1] = dayBit.toString()
         }
-        return dataArray[0]+dataArray[1]
+        return dataArray[0] + dataArray[1]
     }
 
     //获取当前的月份08
-    fun currentMonth8(): String{
+    fun currentMonth8(): String {
         //先定义一个数组
         val monthArray = arrayOf("0", "0")
         //获取当前的day
-        val month = Calendar.getInstance().get(Calendar.MONTH)+1
-        if (month<10){
+        val month = Calendar.getInstance().get(Calendar.MONTH) + 1
+        if (month < 10) {
             monthArray[0] = "0"
             monthArray[1] = month.toString()
-        }else{
-            val monthTen = month / 10 %10
+        } else {
+            val monthTen = month / 10 % 10
             val monthBit = month % 10
             monthArray[0] = monthTen.toString()
             monthArray[1] = monthBit.toString()
         }
-        return monthArray[0]+monthArray[1]
+        return monthArray[0] + monthArray[1]
     }
 
     //获取当前时间的高位
-    fun currentHour8(): String{
+    fun currentHour8(): String {
         //先定义一个数组
         val hourArray = arrayOf("0", "0")
         //获取当前的day
         val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
-        if (hour<10){
+        if (hour < 10) {
             hourArray[0] = "0"
             hourArray[1] = hour.toString()
-        }else{
-            val hourTen = hour / 10 %10
+        } else {
+            val hourTen = hour / 10 % 10
             val hourBit = hour % 10
             hourArray[0] = hourTen.toString()
             hourArray[1] = hourBit.toString()
         }
-        return hourArray[0]+hourArray[1]
+        return hourArray[0] + hourArray[1]
     }
+
     //获取当前的分钟
-    fun currentMinute8(): String{
+    fun currentMinute8(): String {
         //先定义一个数组
         val minuteArray = arrayOf("0", "0")
         //获取当前的day
         val minute = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
-        if (minute<10){
+        if (minute < 10) {
             minuteArray[0] = "0"
             minuteArray[1] = minute.toString()
-        }else{
-            val minuteTen = minute / 10 %10
+        } else {
+            val minuteTen = minute / 10 % 10
             val minuteBit = minute % 10
             minuteArray[0] = minuteTen.toString()
             minuteArray[1] = minuteBit.toString()
         }
-        return minuteArray[0]+minuteArray[1]
+        return minuteArray[0] + minuteArray[1]
     }
 
 
     //获取当前的日期08/19
-    fun currentData(): String{
+    fun currentData(): String {
         //先定义一个数组
         val dataArray = arrayOf("0", "0", "/", "0", "0")
         //获取当前的小时
-        val month = Calendar.getInstance().get(Calendar.MONTH)
+        // TODO 月份显示问题
+        val month = Calendar.getInstance().get(Calendar.MONTH)+1
         //获取当前的月份
-        if (month<10){
+        if (month < 10) {
             dataArray[0] = "0"
-            if (month == 0){
+            if (month == 0) {
                 dataArray[1] = "1"
-            }else{
+            } else {
                 dataArray[1] = month.toString()
             }
-        }else{
+        } else {
             //获取当前的小时十位
-            val monthTen = month/10%10
-            val monthBit = month%10
+            val monthTen = month / 10 % 10
+            val monthBit = month % 10
             dataArray[0] = monthTen.toString()
             dataArray[1] = monthBit.toString()
         }
         //获取当前的day
         val day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
-        if (day<10){
+        if (day < 10) {
             dataArray[3] = "0"
             dataArray[4] = day.toString()
-        }else{
-            val dayTen = day / 10 %10
+        } else {
+            val dayTen = day / 10 % 10
             val dayBit = day % 10
             dataArray[3] = dayTen.toString()
             dataArray[4] = dayBit.toString()
         }
-        return dataArray[0]+dataArray[1]+dataArray[2]+dataArray[3]+dataArray[4]
+        return dataArray[0] + dataArray[1] + dataArray[2] + dataArray[3] + dataArray[4]
     }
 
 
     //方案7获取当前day
-    fun currentDay7(): Array<String>{
-        val dayArray = arrayOf("1","1")
+    fun currentDay7(): Array<String> {
+        val dayArray = arrayOf("1", "1")
         //获取当前的时间
         val day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
-        if (day<10){
+        if (day < 10) {
             dayArray[0] = "0"
             dayArray[1] = day.toString()
-        }else{
-            val dayTen = day / 10 %10
+        } else {
+            val dayTen = day / 10 % 10
             val dayBit = day % 10
             dayArray[0] = dayTen.toString()
             dayArray[1] = dayBit.toString()
@@ -461,20 +501,20 @@ fun currentTime17(): Array<String>{
         return dayArray
     }
 
-    fun currentDayAll7(): String{
-        val dayArray = arrayOf("1","1")
+    fun currentDayAll7(): String {
+        val dayArray = arrayOf("1", "1")
         //获取当前的时间
         val day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
-        if (day<10){
+        if (day < 10) {
             dayArray[0] = "0"
             dayArray[1] = day.toString()
-        }else{
-            val dayTen = day / 10 %10
+        } else {
+            val dayTen = day / 10 % 10
             val dayBit = day % 10
             dayArray[0] = dayTen.toString()
             dayArray[1] = dayBit.toString()
         }
-        return dayArray[0]+dayArray[1]
+        return dayArray[0] + dayArray[1]
 
     }
 
@@ -549,6 +589,7 @@ fun currentTime17(): Array<String>{
         return dayArray
 
     }
+
     fun currentMonthAll7(): String {
         //先定义一个数组
         val dayArray = arrayOf("0", "0", "0")
@@ -615,17 +656,15 @@ fun currentTime17(): Array<String>{
                 dayArray[2] = "C"
             }
         }
-        return dayArray[0]+dayArray[1]+dayArray[2]
+        return dayArray[0] + dayArray[1] + dayArray[2]
 
     }
 
 
-
-
     //方案九获取当前的月份
-    fun currentDay9(): String{
+    fun currentDay9(): String {
         //先定义一个数组
-        val dayArray = arrayOf("0","0","0", "/", "0", "0")
+        val dayArray = arrayOf("0", "0", "0", "/", "0", "0")
         //获取当前的月份
         when (Calendar.getInstance().get(Calendar.MONTH)) {
             0 -> {
@@ -634,69 +673,69 @@ fun currentTime17(): Array<String>{
                 dayArray[2] = "N"
             }
             1 -> {
-                dayArray [0] = "F"
-                dayArray [1] = "E"
-                dayArray [2] = "B"
+                dayArray[0] = "F"
+                dayArray[1] = "E"
+                dayArray[2] = "B"
             }
             2 -> {
-                dayArray [0] = "M"
-                dayArray [1] = "A"
-                dayArray [2] = "R"
+                dayArray[0] = "M"
+                dayArray[1] = "A"
+                dayArray[2] = "R"
             }
             3 -> {
-                dayArray [0] = "A"
-                dayArray [1] = "P"
-                dayArray [2] = "R"
+                dayArray[0] = "A"
+                dayArray[1] = "P"
+                dayArray[2] = "R"
             }
             4 -> {
-                dayArray [0] = "M"
-                dayArray [1] = "A"
-                dayArray [2] = "Y"
+                dayArray[0] = "M"
+                dayArray[1] = "A"
+                dayArray[2] = "Y"
             }
             5 -> {
-                dayArray [0] = "J"
-                dayArray [1] = "U"
-                dayArray [2] = "N"
+                dayArray[0] = "J"
+                dayArray[1] = "U"
+                dayArray[2] = "N"
             }
             6 -> {
-                dayArray [0] = "J"
-                dayArray [1] = "U"
-                dayArray [2] = "L"
+                dayArray[0] = "J"
+                dayArray[1] = "U"
+                dayArray[2] = "L"
             }
             7 -> {
-                dayArray [0] = "A"
-                dayArray [1] = "U"
-                dayArray [2] = "G"
+                dayArray[0] = "A"
+                dayArray[1] = "U"
+                dayArray[2] = "G"
             }
             8 -> {
-                dayArray [0] = "S"
-                dayArray [1] = "E"
-                dayArray [2] = "T"
+                dayArray[0] = "S"
+                dayArray[1] = "E"
+                dayArray[2] = "T"
             }
             9 -> {
-                dayArray [0] = "O"
-                dayArray [1] = "C"
-                dayArray [2] = "T"
+                dayArray[0] = "O"
+                dayArray[1] = "C"
+                dayArray[2] = "T"
             }
             10 -> {
-                dayArray [0] = "N"
-                dayArray [1] = "O"
-                dayArray [2] = "V"
+                dayArray[0] = "N"
+                dayArray[1] = "O"
+                dayArray[2] = "V"
             }
             11 -> {
-                dayArray [0] = "D"
-                dayArray [1] = "E"
-                dayArray [2] = "C"
+                dayArray[0] = "D"
+                dayArray[1] = "E"
+                dayArray[2] = "C"
             }
         }
 
         //获取当前的时间
         val day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
-        if (day<10){
+        if (day < 10) {
             dayArray[4] = "0"
             dayArray[5] = day.toString()
-        }else{
-            val dayTen = day / 10 %10
+        } else {
+            val dayTen = day / 10 % 10
             val dayBit = day % 10
             dayArray[4] = dayTen.toString()
             dayArray[5] = dayBit.toString()
@@ -705,13 +744,8 @@ fun currentTime17(): Array<String>{
     }
 
 
-
-
-
-
-
     fun currentColorItemPosition(id: String): Int {
-        return when(id){
+        return when (id) {
             ColorStyleIdAndResourceIds.COLOR1.id -> 0
             ColorStyleIdAndResourceIds.COLOR2.id -> 1
             ColorStyleIdAndResourceIds.COLOR3.id -> 2
@@ -751,7 +785,6 @@ fun currentTime17(): Array<String>{
             else -> 0
         }
     }
-
 
 
 }

@@ -3,10 +3,16 @@ package com.android.mi.wearable.albumwatchface.editor
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
+import android.view.ViewConfiguration
 import androidx.activity.ComponentActivity
+import androidx.core.view.InputDeviceCompat
+import androidx.core.view.MotionEventCompat
+import androidx.core.view.ViewConfigurationCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
+import com.android.mi.wearable.albumwatchface.WatchFaceService5
 import com.android.mi.wearable.albumwatchface.data.watchface.*
 import com.android.mi.wearable.albumwatchface.databinding.ActivityWatchFaceConfig5Binding
 import com.android.mi.wearable.albumwatchface.utils.BitmapTranslateUtils
@@ -177,6 +183,29 @@ class WatchFace5ConfigActivity : ComponentActivity(), IComplicationClick {
                     }
                 }
         }
+
+        binding.pager.post {
+            Log.d("binding.pager.post", "post")
+            binding.pager.setOnGenericMotionListener { v, ev ->
+                if (ev.action == MotionEvent.ACTION_SCROLL &&
+                    ev.isFromSource(InputDeviceCompat.SOURCE_ROTARY_ENCODER)
+                ) {
+                    // Don't forget the negation here
+                    val delta = -ev.getAxisValue(MotionEventCompat.AXIS_SCROLL) *
+                            ViewConfigurationCompat.getScaledVerticalScrollFactor(
+                                ViewConfiguration.get(this), this
+                            )
+                    Log.d("binding.pager.post", "delta : $delta")
+//                    // Swap these axes to scroll horizontally instead
+//                    v.scrollBy(0, delta.roundToInt())
+                    true
+                } else {
+                    false
+                }
+            }
+            binding.pager.requestFocus()
+        }
+
     }
 
     private fun initHorizontalViewPager() {
@@ -229,8 +258,6 @@ class WatchFace5ConfigActivity : ComponentActivity(), IComplicationClick {
     fun onConfirmClick(view: View) {
         isSelected = true
         onBackPressedDispatcher.onBackPressed()
-
-
     }
 
     private fun updateWatchFacePreview(

@@ -58,7 +58,6 @@ enum class PositionStyle(
          * options for the user to select a style.
          */
         fun toOptionList(context: Context): List<UserStyleSetting.ListUserStyleSetting.ListOption> {
-
                 val positionStyleIdAndResourceIdsList = arrayOf(TOP,BOTTOM,LEFT,RIGHT)
                 return positionStyleIdAndResourceIdsList.map { shapeStyleIdAndResourceIds ->
                     UserStyleSetting.ListUserStyleSetting.ListOption(

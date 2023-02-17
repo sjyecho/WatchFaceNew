@@ -17,23 +17,17 @@ package com.android.mi.wearable.albumwatchface.utils
 
 import android.content.Context
 import android.graphics.RectF
-import android.util.Log
-import androidx.wear.watchface.CanvasComplicationFactory
-import androidx.wear.watchface.ComplicationSlot
-import androidx.wear.watchface.ComplicationSlotsManager
+import androidx.wear.watchface.*
 import androidx.wear.watchface.complications.ComplicationSlotBounds
 import androidx.wear.watchface.complications.DefaultComplicationDataSourcePolicy
 import androidx.wear.watchface.complications.SystemDataSources
+import androidx.wear.watchface.complications.data.ComplicationExperimental
 import androidx.wear.watchface.complications.data.ComplicationType
 import androidx.wear.watchface.complications.rendering.CanvasComplicationDrawable
 import androidx.wear.watchface.complications.rendering.ComplicationDrawable
 import androidx.wear.watchface.style.CurrentUserStyleRepository
+import androidx.wear.watchface.style.UserStyleSetting
 import com.android.mi.wearable.albumwatchface.R
-import com.android.mi.wearable.albumwatchface.data.watchface.FinalStatic
-import com.android.mi.wearable.albumwatchface.data.watchface.PositionStyle1
-import com.android.mi.wearable.albumwatchface.data.watchface.STYLE1
-import com.android.mi.wearable.albumwatchface.data.watchface.STYLE2
-import kotlin.math.log
 
 // Information needed for complications.
 // Creates bounds for the locations of both right and left complications. (This is the
@@ -54,7 +48,7 @@ internal const val BOTTOM_COMPLICATION_ID_1 = 101
 //style2的四个
 internal const val TOP_COMPLICATION_ID_2 = 102
 internal const val BOTTOM_COMPLICATION_ID_2 = 103
-internal const val LEFT_COMPLICATION_ID_2= 104
+internal const val LEFT_COMPLICATION_ID_2 = 104
 internal const val RIGHT_COMPLICATION_ID_2 = 105
 
 //style5的两个
@@ -63,8 +57,8 @@ internal const val RIGHT_COMPLICATION_ID_5 = 107
 
 //Style6的三个
 internal const val TOP_COMPLICATION_ID_6 = 108
-internal const val BOTTOM_COMPLICATION_ID_6= 109
-internal const val RIGHT_COMPLICATION_ID_6= 110
+internal const val BOTTOM_COMPLICATION_ID_6 = 109
+internal const val RIGHT_COMPLICATION_ID_6 = 110
 
 
 /**
@@ -101,10 +95,11 @@ sealed class ComplicationConfig(val id: Int, val supportedTypes: List<Complicati
             ComplicationType.SHORT_TEXT,
         )
     )
+
     object Left2 : ComplicationConfig(
         LEFT_COMPLICATION_ID_2,
         listOf(
-           ComplicationType.SHORT_TEXT,
+            ComplicationType.SHORT_TEXT,
         )
     )
 
@@ -114,7 +109,7 @@ sealed class ComplicationConfig(val id: Int, val supportedTypes: List<Complicati
 
             ComplicationType.SHORT_TEXT,
 
-        )
+            )
     )
 
     //style5
@@ -124,14 +119,15 @@ sealed class ComplicationConfig(val id: Int, val supportedTypes: List<Complicati
 
             ComplicationType.SHORT_TEXT,
 
-        )
+            )
     )
+
     object Right5 : ComplicationConfig(
         RIGHT_COMPLICATION_ID_5,
         listOf(
             ComplicationType.SHORT_TEXT,
 
-        )
+            )
     )
 
     //style6
@@ -139,7 +135,7 @@ sealed class ComplicationConfig(val id: Int, val supportedTypes: List<Complicati
         TOP_COMPLICATION_ID_6,
         listOf(
 
-           ComplicationType.SHORT_TEXT,
+            ComplicationType.SHORT_TEXT,
         )
     )
 
@@ -147,10 +143,11 @@ sealed class ComplicationConfig(val id: Int, val supportedTypes: List<Complicati
         BOTTOM_COMPLICATION_ID_6,
         listOf(
 
-           ComplicationType.SHORT_TEXT,
+            ComplicationType.SHORT_TEXT,
 
-        )
+            )
     )
+
     object Right6 : ComplicationConfig(
         RIGHT_COMPLICATION_ID_6,
         listOf(
@@ -332,7 +329,6 @@ fun createComplicationSlotManager(
         )
     ).build()
 
-
     //style6
     val topComplication6 = ComplicationSlot.createRoundRectComplicationSlotBuilder(
         id = ComplicationConfig.Top6.id,
@@ -393,7 +389,19 @@ fun createComplicationSlotManager(
 
 
     return ComplicationSlotsManager(
-        listOf(topComplication1, bottomComplication1,topComplication2,bottomComplication2,leftComplication2,rightComplication2,leftComplication5,rightComplication5,topComplication6,bottomComplication6,rightComplication6),
+        listOf(
+            topComplication1,
+            bottomComplication1,
+            topComplication2,
+            bottomComplication2,
+            leftComplication2,
+            rightComplication2,
+            leftComplication5,
+            rightComplication5,
+            topComplication6,
+            bottomComplication6,
+            rightComplication6
+        ),
         currentUserStyleRepository
     )
 }

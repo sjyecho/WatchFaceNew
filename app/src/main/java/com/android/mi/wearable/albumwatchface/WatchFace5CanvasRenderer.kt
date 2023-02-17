@@ -3,6 +3,7 @@ package com.android.mi.wearable.albumwatchface
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.res.Resources
 import android.graphics.*
 import android.os.BatteryManager
 import android.util.Log
@@ -23,6 +24,7 @@ import java.io.File
 import java.time.Duration
 import java.time.ZonedDateTime
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.math.abs
 
 
@@ -348,6 +350,8 @@ class WatchFace3CanvasRenderer(
     private val scope: CoroutineScope =
         CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
+    private var picture = ArrayList<String>()
+
 
     init {
         /**
@@ -425,6 +429,19 @@ class WatchFace3CanvasRenderer(
         super.onRenderParametersChanged(renderParameters)
     }
 
+    fun changeImageValue() {
+        if (picture.size == 0) {
+            return
+        } else {
+            //当前数字和size一样大的时候
+            if (FinalStatic.pictureIndex == (picture.size - 1)) {
+                FinalStatic.pictureIndex = 0
+            } else {
+                FinalStatic.pictureIndex++
+            }
+        }
+    }
+
     override fun render(
         canvas: Canvas,
         bounds: Rect,
@@ -448,10 +465,12 @@ class WatchFace3CanvasRenderer(
             if (FinalStatic.setPicture == 0) {
                 val filepath1 = "/storage/emulated/0/Pictures/watchface"
                 val file = File(filepath1)
+                val fileList = ArrayList<String>()
                 if (file.exists()) {
-                    val files = file.listFiles()
-                    for (file in files) {
-                        val testPath = file.path
+                    picture = BitmapTranslateUtils.getPictureList(filepath1, fileList)
+                    for (file in BitmapTranslateUtils.getPictureList(filepath1, fileList)) {
+                        val testPath =
+                            "/storage/emulated/0/Pictures/watchface" + File.separator + fileList[FinalStatic.pictureIndex]
                         val bm = BitmapFactory.decodeFile(testPath)
                         canvas.drawBitmap(bm, null, bounds, clockPaint)
                     }
@@ -478,7 +497,7 @@ class WatchFace3CanvasRenderer(
         drawTime(canvas, bounds, zonedDateTime)
     }
 
-    //绘制当前的背景和时
+    //绘制当前的背景和时间
     private fun drawTime(canvas: Canvas, bounds: Rect, zonedDateTime: ZonedDateTime) {
         val drawAmbient = renderParameters.drawMode == DrawMode.AMBIENT
         //style1 样式正确
@@ -1928,9 +1947,30 @@ class WatchFace3CanvasRenderer(
         }
     }
 
-
     // ----- All drawing functions -----
     private fun drawComplications(canvas: Canvas, bounds: Rect, zonedDateTime: ZonedDateTime) {
+//        val er =
+//            UserStyleSetting.ComplicationSlotsUserStyleSetting.ComplicationSlotOverlay.Builder(100)
+//                .setEnabled(false).build()
+//        val ee =
+//            UserStyleSetting.ComplicationSlotsUserStyleSetting.ComplicationSlotOverlay.Builder(101)
+//                .setEnabled(false).build()
+//        UserStyleSetting.ComplicationSlotsUserStyleSetting.ComplicationSlotsOption(
+//            id = UserStyleSetting.Option.Id("11"),
+//            resources = Resources.getSystem(),
+//            displayNameResourceId = R.string.app_name,
+//            icon = null,
+//            listOf(ee, er),
+//            null
+//        )
+//        val a = object : ComplicationSlotsManager.TapCallback {
+//            override fun onComplicationSlotTapped(complicationSlotId: Int) {
+//                super.onComplicationSlotTapped(complicationSlotId)
+//                //Log.d("poiuy", complicationSlotsManager.complicationSlots[complicationSlotId].toString())
+//                Log.d("poiuy", "ComplicationSlotsManager.TapCallback")
+//            }
+//        }
+        //complicationSlotsManager.addTapListener(a)
         for ((_, complication) in complicationSlotsManager.complicationSlots) {
             if (complication.enabled) {
                 renderParameters.lastComplicationTapDownEvents
